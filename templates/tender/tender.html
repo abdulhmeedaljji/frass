@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tenders</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static   'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static  'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Vendor CSS Files -->
+  <link href="{% static  'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static  ' assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    .card-text {
+      color: 	#0000FF;
+      font-size: 20px;
+      padding-top:5px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center"  style="background-color:black;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+
+        <h1>Farss<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar" >
+        <ul>
+          <li><a href="{% url 'Home' %}" class="active">Home</a></li>
+          <li><a href="#About">About</a></li>
+          <li><a href="#Servicess">Services</a></li>
+          <li><a href="#prcice">prices</a></li>
+          <div id="google_translate_element"> </div>
+
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+    <section id="" class="">
+            <div class="container text-center" style="padding-top:50px;">
+              <form method= "POST">
+                {% csrf_token %}
+
+                <div class="row">
+                  <div class="col-3">
+                    <input type="text" name="tittle" class="form-control" id="inputPassword" placeholder="search by keywords " >
+                  </div>
+
+                  <div class="col-3">
+                    <input type="text" name="state" class="form-control" id="inputPassword" placeholder="state " >
+                  </div>      
+                  <div class="col-3">
+
+                    <select class="form-select" name="sectors" aria-label="Default select example">
+                      <option value="">state</option>
+
+                      {% for c in Ch %}
+
+                      <option value="{{c.id}}">{{c.name}}</option>
+                      {% endfor %}
+                    </select>
+
+                  </div>
+
+                  <div class="col-3">
+                    <input type="date" name="dates" class="form-control" id="inputPassword" placeholder="date " >
+                  </div>
+
+
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary" style="">search</button>
+                  </div>
+
+                </div>
+             </form>
+            </div>
+
+            <div class="container">
+              {% for t in tenders  %}
+              
+              <div class="d-flex justify-content-center " style="padding-top:10px;">
+                <div class="card text-center " style="height: 200px; width: 600px;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{t.tittle}}</h5>
+                         
+                        <div class="row">
+                          <div class="col">
+                              <div class="col-3">
+                                <i class="bi bi-lightning-charge"></i>  
+
+                              {% for tt in t.sectoer.all  %}
+  
+                                <p class="text-muted"> {{tt}}</p>
+                              {% endfor %}
+
+                              </div>
+
+                            </div>
+
+                
+
+
+
+                            <div class="col">
+                              <i class="bi bi-geo-alt"> <p class="text-muted"> {{t.state}} </p>  </i>     
+                            </div>    
+                            
+                            
+                            <div class="" style="padding-bottom:-5px;">
+
+                              <a href="{% url 'tenderdetaile' id=t.id %}" class="btn btn-primary">Go Details</a>
+                            </div>
+
+
+                      </div>
+
+
+
+
+                  </div>
+                </div>
+
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>  
+
+
+    
+        
+
+    </section>
+ 
+
+
+
+
+
+  <script src="{% static  'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static  'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static  'assets/js/main.js' %}"></script>
+
+
+    
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'auto', // Automatically detect the user's browser language
+        includedLanguages: 'en,fr,ar', // List of languages to include in the dropdown
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
+      }, 'google_translate_element');
+    }
+  </script> 
+  
+  
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,301 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Subscription </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static   'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static  'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" /> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+  <!-- Or for RTL support -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Vendor CSS Files -->
+  <link href="{% static  'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static  ' assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    .card-text {
+      color: 	#0000FF;
+      font-size: 20px;
+      padding-top:5px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center"  style="background-color:black;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+
+        <h1>Farss<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar" >
+        <ul>
+          <li><a href="{% url 'Home' %}" class="active">Home</a></li>
+          <li><a href="#About">About</a></li>
+          <li><a href="#Servicess">Services</a></li>
+          <li><a href="#prcice">prices</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+    <section id="" class="">
+
+          <div class="container"  style="padding-top:50px;">
+            <div class="row">
+               <div class="col-12">
+                  <div class="d_flex text-center ">  
+                    <h2> new subscription register </h3>
+                  </div>
+                </div>
+
+                <div class="col-12" style="padding-top:10px;";>
+                  <div class="d_flex text-center ">  
+                    <h6 id="plans" onload="namePlan()">  </h6>
+                  </div>
+                </div>
+
+
+
+                <div class="col-12" style="padding-top:10px;";>
+                  <div class="d_flex text-center ">  
+                    <h6 id=""> you can pay using   </h6>
+                  </div>
+                </div>
+
+
+
+
+
+            </div>     
+              
+          </div>  
+
+
+    
+           <div class="container  " style="padding-top:50px;">
+            <div class=" d_flex  text-center">
+              <form method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+               <div class="form-group row-6 " style="padding-top:15px;"  >
+                <center>
+
+                  {% for msg in messages %}
+
+                    <div class="alert alert-success" role="alert">
+                      {{msg}}
+                    </div>
+                  {% endfor %} 
+                  <div class="col-6">
+
+                      <select class="form-select " id="multiple-select-clear-field" name="my-select[]" onchange="getSelectedCount()"  data-placeholder="Choose the sector you want subscription" multiple  >
+                        {% for c in Ch %} 
+
+                        <option value="{{c.id}}">{{c.name}}</option>
+
+                        {% endfor %}
+
+      
+                        </select>
+                  </div>
+                </center>
+
+
+
+
+                <div class="form-group row"style="padding-top:15px;">
+                  <label for="exampleInput" class="col-sm-3 col-form-label">Prcice of theis subscription</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control  " id="exampleInput"  value="1600 DZ" readonly  >
+                  </div>
+                </div>
+
+                
+                <div class="form-group row" style="padding-top:15px;">
+                  <label for="exampleInput" class="col-sm-3 col-form-label">Duration</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control " id="exampleInput"  value="30 Days" readonly  >
+                  </div>
+                </div>
+
+
+                             
+                <div class="form-group row" style="padding-top:15px;">
+                  <label for="exampleInput" class="col-sm-3 col-form-label">Payment  verification</label>
+                  <div class="col-sm-6">
+                    <input type="file" class="form-control-file" name="file" id="exampleFormControlFile" accept="image/*">
+                  </div>
+                </div>
+
+                
+
+
+
+                <div class="form-group" style="padding-top:15px; ">
+                  
+                  <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+
+               </div>
+
+              </form>  
+            </div>
+          </div>
+    </section>
+ 
+
+
+
+
+
+  <script src="{% static  'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static  'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static  'assets/js/main.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+
+
+  <script>
+
+    $( '#multiple-select-clear-field' ).select2( {
+      theme: "bootstrap-5",
+      width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+      placeholder: $( this ).data( 'placeholder' ),
+      closeOnSelect: false,
+      allowClear: true,
+  } );
+
+
+
+
+   function getSelectedCount() {
+      var select = document.getElementById("multiple-select-clear-field");
+
+      url=window.location.href;
+      const pathArray = url.split("/");
+      const PathString = pathArray[pathArray.length - 2];
+      console.log(PathString);
+
+
+      const count = select.selectedOptions.length;
+      console.log(`Selected count: ${count}`);
+
+      
+      if (PathString == 'Basic' &&  count >=1   )
+      {
+
+        var selectionoption= select.options[select.selectedIndex];
+        selectionoption.selected = false;
+
+      }
+
+
+      if (PathString == 'plan1' &&  count >= 3   )
+      {
+
+        var selectionoption= select.options[select.selectedIndex];
+        selectionoption.selected = false;
+
+      }
+
+
+  
+
+      if (PathString == 'plan2' &&  count >= 5   )
+      {
+
+        var selectionoption= select.options[select.selectedIndex];
+        selectionoption.selected = false;
+
+      }
+
+      
+      
+  } 
+
+
+
+  window.onload = function() {
+    url=window.location.href;
+    const pathArray = url.split("/");
+    const PathString = pathArray[pathArray.length - 2];
+    console.log(PathString);
+
+    var myParagraph = document.getElementById("plans");
+    if (PathString == "Basic"){
+      myParagraph.textContent = "in this plan you can select 1 sector ";
+    }
+
+
+    if (PathString == "plan1"){
+      myParagraph.textContent = "in this plan you can select 3 sector ";
+    }
+
+
+    
+    if (PathString == "plan2"){
+      myParagraph.textContent = "in this plan you can select 5 sector ";
+    }
+
+
+
+  }
+
+
+
+
+   
+        
+
+
+
+  
+    
+
+  </script>
+
+</body>
+
+</html>

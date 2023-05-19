@@ -1,0 +1,512 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Algeria</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static   'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static  'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Vendor CSS Files -->
+  <link href="{% static  'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    .card-text {
+      color: 	#0000FF;
+      font-size: 20px;
+      padding-top:5px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
+    
+        <h1>Farss<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="" class="active">{% trans  'Home' %} </a></li>
+          <li><a href="{% url 'dashboard' %}">dashboard</a></li>
+          <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
+
+          {% if request.user.is_superuser %}
+
+           <li><a href="{% url 'added_tender' %}"> {% trans 'added' %}  </a></li>
+
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
+
+          <div id="google_translate_element"> </div>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  {% for msg in messages %}
+
+  <div class="alert alert-success" role="alert">
+    {{msg}}
+  </div>
+ {% endfor %} 
+
+  <section id="hero" class="hero">
+
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-item active" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-1.jpg' %})">
+        <div class="carousel-caption" style="margin-bottom:200px;">
+
+          <h1> <strong> Welcome to  </strong> Frass</h1>
+          <p>This is best site for tender </p>
+          <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
+        </div>
+
+      </div>
+      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-2.jpg' %})">
+          <div class="carousel-caption" style="margin-bottom:200px;">
+          
+          <h1>  <strong> Welcome to  </strong> Frass</h1>
+          <p>This is best site for tender </p>
+          <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-3.jpg' %})">
+        <div class="carousel-caption" style="margin-bottom:200px;">  
+          <h1>  <strong> Welcome to  </strong> Frass</h1>
+          <p>This is best site for tender </p>
+          <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+    </div>
+
+
+
+
+
+
+    
+
+    {% comment %} <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <div class="carousel-item active" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-1.jpg' %})"></div>
+      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-2.jpg' %})"></div>
+      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-3.jpg' %})"></div>
+      <div class="carousel-item" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-4.jpg'  %}) "></div>
+      <div class="carousel-item" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-5.jpg' %})"></div>
+
+      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div> {% endcomment %}
+{% comment %} 
+    <div class="info d-flex align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2 data-aos="fade-down">Welcome to <span>Farass</span></h2>
+            <p data-aos="fade-up">Get tender announcements in all states of Algeria.</p>
+            <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div> {% endcomment %}
+
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= Constructions Section ======= -->
+    <section id="constructions" class="constructions">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2 id="About">About</h2>
+          <h3>WHO ARE WE ?</h3>
+        </div>
+        <div class="row gy-4  justify-content-center" >
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100"  style="width:800px; ">
+            <div class="card-item">
+              <div class="row">
+                <div class="col-xl-5">
+                  <div class="card-bg" style="background-image: url({% static  'assets/img/projects/design-2.jpg' %});"></div>
+                </div>
+                <div class="col-xl-7 d-flex align-items-center  ">
+                  <div class="card-body">
+                    <h4 class="card-title"> frass is platform.</h4>
+                    <p>is the best professional site that offers a shortcut to the ALGERIAN PUBLIC & PRIVATE markets. In addition to the NOTICES of CALLS FOR TENDERS, Our site publishes the follow-up of the life cycle of the projects AWARDS, CANCELLATIONS, INFRUCTUOSITIES, NOTICES OF DEMAND & TERMINATIONS.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Card Item -->          
+        </div>
+      </div>
+    </section><!-- End Constructions Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2 id="Servicess"  >Services</h2>
+          <p> we provied our customer with </p>
+        </div>
+
+        <div class="row gy-4">
+        
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              </div>
+              <h3>get all tenders across the entire national territory </h3>
+           
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-activity"></i>
+              </div>
+              <h3>Daily and reliable data across the entire states of Algeria</h3>            
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-cart"></i>
+              </div>
+              <h3>Competitive prices and convenient payment methods</h3>          
+            </div>
+          </div><!-- End Service Item -->
+        </div>
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Last tender Section ======= -->
+
+
+    <section id="testimonials" class="testimonials section-bg" style="background-color:white;">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Last tender added</h2>
+        </div>
+
+        <div class="slides-2 swiper">
+          <div class="swiper-wrapper">
+            {% for last in last_five_objects %}
+            
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <h2 class="text-center" >{{last.tittle}}</h3>
+                    <center>  
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <p>
+                            <i class="bi bi-geo-alt"></i> {{last.state}} 
+                          </p>
+                        </div>
+
+                        <div class="col">
+                         {% for tt in last.sectoer.all %}
+                          <p class= style="color:black;" > scectoer : {{tt}}</p>
+                         {% endfor %}
+                        </div>
+
+                    </center>
+
+                    <center>
+                      <a href="{% url 'tenderdetaile' id=last.id %}" class="btn btn-primary">Details</a>
+
+                    </center> 
+
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+
+            {% endfor %} 
+
+            </div><!-- End testimonial item -->
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+     
+  <section id="recent-blog-posts" class="recent-blog-posts" style="background-color:#f7f9f8;">
+
+    {% if subscription %}
+
+    {% else %}
+
+
+   <div class="container">
+    
+
+      <div class=" section-header" >
+
+        <h2 id="prcice">OUR PRICES AND PLANS</h2>
+        <p>We offer a range of subscription packages thcard-text at provide users with many features</p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col-12">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">Studies and laboratories</h5>
+              <p class="card-text  text-center">15,000 DZD including TAX.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center">up to 1 categories</li>
+              <li class="list-group-item text-center">can select the categories </li>
+            </ul>
+            <div class="card-footer">
+              <center>   <a href="{% url 'BasicSubscriptionView' 'Basic'  %}" class="btn btn-primary">Register</a> </center>
+            </div>
+          </div>
+        </div>
+{% comment %} 
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">plan 1</h5>
+
+              <p class="card-text  text-center">1,900 DZD including TAX.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center">up to 3 categories</li>
+              <li class="list-group-item text-center">can select the categories </li>
+            </ul>
+            <div class="card-footer">
+              <center>   <a href="{% url 'BasicSubscriptionView' 'plan1' %}" class="btn btn-primary">Register</a> </center>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">plan 2</h5>
+              <p class="card-text  text-center">1,900 DZD including TAX.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center">up to 5 categories</li>
+              <li class="list-group-item text-center">can select the categories </li>
+            </ul>
+            <div class="card-footer">
+              <center>   <a href="{% url 'BasicSubscriptionView' 'plan2'  %}" class="btn btn-primary">Register</a> </center>
+            </div>
+          </div> 
+        </div>
+{% comment %} 
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">plan 3</h5>
+              <p class="card-text  text-center">1,900 DZD including TAX.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center">up to 10 categories</li>
+              <li class="list-group-item text-center">can select the categories </li>
+            </ul>
+            <div class="card-footer">
+              <center>   <a href="{% url 'BasicSubscriptionView' 'plan3'  %}" class="btn btn-primary">Register</a> </center>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">plan 4</h5>
+              <p class="card-text  text-center">1,900 DZD including TAX.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center">all categories</li>
+            </ul>
+
+            <div class="card-footer">
+             <center>   <a href="{% url 'BasicSubscriptionView' 'plan4' %}" class="btn btn-primary">Register</a> </center>
+            </div>
+          </div>
+        </div> {% endcomment %}
+
+      </div>
+
+    
+      </div>
+     {% endif %} 
+    </section>
+    <!-- End Recent Blog Posts Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-content position-relative">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info">
+              <h3>Frass</h3>
+              <p>
+                A108 Adam Street <br>
+                NY 535022, USA<br><br>
+                <strong>Phone:</strong> +1 5589 55488 55<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links d-flex mt-3">
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div><!-- End footer info column-->
+
+          <div class="col-lg-4 col-md-8 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#About">About us</a></li>
+              <li><a href="#Service">Services</a></li>
+           
+            </ul>
+          </div><!-- End footer links column-->
+
+   
+    
+          <div class="col-lg-4 col-md-8 footer-links">
+            <h4>Service</h4>
+            <ul>
+              <li><a href="#">Payment easily </a></li>
+              <li><a href="#About">All tenders in Algeria</a></li>
+              <li><a href="#Service">Best prcice </a></li>
+           
+            </ul>
+          </div><!-- End footer links column-->
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-legal text-center position-relative">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Frass</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+                  Designed by <a href="">Abdulhmmed Aljji</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static  'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static  'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static  'assets/js/main.js' %}"></script>
+
+   <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'auto', // Automatically detect the user's browser language
+        includedLanguages: 'en,fr,ar', // List of languages to include in the dropdown
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
+      }, 'google_translate_element');
+    }
+  </script> 
+  
+  
+
+
+  <!-- Add the Google Translate API script -->
+
+  
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+
+</body>
+
+</html>
