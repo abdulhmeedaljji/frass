@@ -58,9 +58,9 @@
   <header id="header" class="header d-flex align-items-center"  style="background-color:black;">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
 
-        <h1>Farss<span>.</span></h1>
+        <h1>safakat <span></span></h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -68,7 +68,6 @@
       <nav id="navbar" class="navbar" >
         <ul>
           <li><a href="{% url 'Home' %}" class="active">Home</a></li>
-          <div id="google_translate_element"> </div>
 
         </ul>
       </nav><!-- .navbar -->
@@ -80,143 +79,165 @@
     <section id="" class="">
 
 
-    <div class="container text-center" style="padding-top:50px;">
+    <div class="container text-center " style="padding-top:50px;">
       <h3> added tender</h3> 
 
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
 
-        <!-- 2 column grid layout with text inputs for the first and last names -->
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline">
-              <label class="form-label" for="form6Example1"> Tittle </label>
+      <center>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
 
-              <input type="text" id="form6Example1" name="tittle" class="form-control" required  />
-            </div>
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-8">
+           
+            <center>
+              <div class="col-md-6">
+                <div class="form-outline">
+                  <label class="form-label" for="form6Example1"> Tittle </label>
+
+                  <input type="text" id="form6Example1" name="tittle" class="form-control" required  />
+                </div>
+              </div>
+            </center>  
+        
           </div>
-      
-        </div>
-      
-        <!-- Text input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form6Example3">state</label>
-          <select class="form-select" name="state" aria-label="Default select example" required>
-            <option value="Adrar">Adrar</option>
-            <option value="Chlef">Chlef</option>
-            <option value="Laghouat">Laghouat</option>
-            <option value="Oum El Bouaghi">Oum El Bouaghi</option>
-            <option value="Batna">Batna</option>
-            <option value="Béjaïa">Béjaïa</option>
-            <option value="Biskra">Biskra</option>
-            <option value="Béchar">	Béchar</option>
-            <option value="Blida">Blida</option>
-            <option value="Bouïra">Bouïra</option>
-            <option value="Tamanrasset">Tamanrasset</option>
-            <option value="	Tébessa">	Tébessa</option>
-            <option value="Tlemcen">Tlemcen</option>
-            <option value="Tiaret">Tiaret</option>
-            <option value="Tlemcen">Tlemcen</option>
-            <option value="Tizi Ouzou">Tizi Ouzou</option>
-            <option value="Tlemcen">Tlemcen</option>
-            <option value="	Algiers">	Algiers</option>
-            <option value="	Jijel">	Jijel</option>
-            <option value="Sétif">Sétif</option>
-            <option value="Saïda">	Saïda</option>
-            <option value="Skikda">	Skikda</option>
-            <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
-            <option value="	Annaba">	Annaba</option>
-            <option value="	Guelma">	Guelma</option>
-            <option value="Constantine">Constantine</option>
-            <option value="Médéa">Médéa</option>
-            <option value="Mostaganem">Mostaganem</option>
-            <option value="	M'Sila">	M'Sila</option>
-            <option value="Mascara">Mascara</option>
-            <option value="	Ouargla">	Ouargla</option>
-            <option value="Oran">Oran</option>
-            <option value="	El Bayadh">	El Bayadh</option>
-            <option value="Illizi">Illizi</option>
-            <option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
-            <option value="	Boumerdès">	Boumerdès</option>
-            <option value="	El Tarf">	El Tarf</option>
-            <option value="Tindouf">Tindouf</option>
-            <option value="Tissemsilt">Tissemsilt</option>
-            <option value="El Oued">El Oued</option>
-            <option value="Khenchela">Khenchela</option>
-            <option value="Souk Ahras">Souk Ahras</option>
-            <option value="Tipaza">Tipaza</option>
-            <option value="	Mila">	Mila</option>
-            <option value="	Aïn Defla">	Aïn Defla</option>
-            <option value="	Naâma">	Naâma</option>
-            <option value="Aïn Témouchent">Aïn Témouchent</option>
-            <option value="El M'Ghair">El M'Ghair</option>
-            <option value="Relizane">Relizane</option>
-            <option value="El M'Ghair">El M'Ghair</option>
-            <option value="	Ouled Djellal">	Ouled Djellal</option>
-            <option value="Bordj Baji Mokhtar">Bordj Baji Mokhtar</option>
-            <option value="	Béni Abbès">	Béni Abbès</option>
-            <option value="	Touggourt">	Touggourt</option>
-            <option value="Djanet">Djanet</option>
-            <option value="Ain Salah">Ain Salah</option>
-            <option value="Ain Guezzam">Ain Guezzam</option>
-            
+        
+          <!-- Text input -->
+          <div class="col-md-6">
 
-
-          </select>
-        </div>
-      
-        <!-- Text input -->
-        <div class="form-outline mb-4">
-            <label class="form-label"  for="form6Example4">sector</label>
-
-
-            <select class="form-select " id="multiple-select-clear-field" name="sectors[]" onchange=""  data-placeholder="Choose the sector you want subscription" multiple  required >
-              {% for c in Ch %} 
-
-              <option value="{{c.id}}">{{c.name}}</option>
-
-              {% endfor %}
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form6Example3">state</label>
+              <select class="form-select" name="state" aria-label="Default select example" required>
+                <option value="Adrar">Adrar</option>
+                <option value="Chlef">Chlef</option>
+                <option value="Laghouat">Laghouat</option>
+                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+                <option value="Batna">Batna</option>
+                <option value="Béjaïa">Béjaïa</option>
+                <option value="Biskra">Biskra</option>
+                <option value="Béchar">	Béchar</option>
+                <option value="Blida">Blida</option>
+                <option value="Bouïra">Bouïra</option>
+                <option value="Tamanrasset">Tamanrasset</option>
+                <option value="	Tébessa">	Tébessa</option>
+                <option value="Tlemcen">Tlemcen</option>
+                <option value="Tiaret">Tiaret</option>
+                <option value="Tlemcen">Tlemcen</option>
+                <option value="Tizi Ouzou">Tizi Ouzou</option>
+                <option value="Tlemcen">Tlemcen</option>
+                <option value="	Algiers">	Algiers</option>
+                <option value="	Jijel">	Jijel</option>
+                <option value="Sétif">Sétif</option>
+                <option value="Saïda">	Saïda</option>
+                <option value="Skikda">	Skikda</option>
+                <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                <option value="	Annaba">	Annaba</option>
+                <option value="	Guelma">	Guelma</option>
+                <option value="Constantine">Constantine</option>
+                <option value="Médéa">Médéa</option>
+                <option value="Mostaganem">Mostaganem</option>
+                <option value="	M'Sila">	M'Sila</option>
+                <option value="Mascara">Mascara</option>
+                <option value="	Ouargla">	Ouargla</option>
+                <option value="Oran">Oran</option>
+                <option value="	El Bayadh">	El Bayadh</option>
+                <option value="Illizi">Illizi</option>
+                <option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
+                <option value="	Boumerdès">	Boumerdès</option>
+                <option value="	El Tarf">	El Tarf</option>
+                <option value="Tindouf">Tindouf</option>
+                <option value="Tissemsilt">Tissemsilt</option>
+                <option value="El Oued">El Oued</option>
+                <option value="Khenchela">Khenchela</option>
+                <option value="Souk Ahras">Souk Ahras</option>
+                <option value="Tipaza">Tipaza</option>
+                <option value="	Mila">	Mila</option>
+                <option value="	Aïn Defla">	Aïn Defla</option>
+                <option value="	Naâma">	Naâma</option>
+                <option value="Aïn Témouchent">Aïn Témouchent</option>
+                <option value="El M'Ghair">El M'Ghair</option>
+                <option value="Relizane">Relizane</option>
+                <option value="El M'Ghair">El M'Ghair</option>
+                <option value="	Ouled Djellal">	Ouled Djellal</option>
+                <option value="Bordj Baji Mokhtar">Bordj Baji Mokhtar</option>
+                <option value="	Béni Abbès">	Béni Abbès</option>
+                <option value="	Touggourt">	Touggourt</option>
+                <option value="Djanet">Djanet</option>
+                <option value="Ain Salah">Ain Salah</option>
+                <option value="Ain Guezzam">Ain Guezzam</option>
+                
 
 
               </select>
+            </div>
+          </div>
+          <!-- Text input -->
+
+          <div class="col-md-6"> 
+            <div class="form-outline mb-4">
+                <label class="form-label"  for="form6Example4">sector</label>
+
+                <select class="form-select " id="multiple-select-clear-field" name="sectors[]" onchange=""  data-placeholder="Choose the sector you want subscription" multiple  required >
+                  {% for c in Ch %} 
+
+                  <option value="{{c.id}}">{{c.name}}</option>
+
+                  {% endfor %}
+
+
+                  </select>
 
 
 
+        
+
+
+            </div>
+          </div>  
+
+
+        
+          <!-- Email input -->
+
+          <div class="col-md-6"> 
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form6Example5">start in </label>
+
+              <input type="date" class="form-control" name="startdate" id="my-date-input" name="my-date" required>        
+          
+            </div>
+          </div>
+
+          <div class="col-md-6"> 
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form6Example5">end in </label>
+
+              <input type="date" class="form-control" name="enddate" id="my-date-input" name="my-date" required>        
+          
+            </div>
+          </div>  
+
+
+          <!-- Number input -->
+          <div class="col-md-6">  
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form6Example6">image </label>
+
+              <input type="file" id="form6Example6" name="img" accept="image/*" class="form-control" /  multiple required>
+            </div>
+          </div>
+
+
+          <!-- Message input -->
     
+        
+          <!-- Submit button -->
 
-
-        </div>
-      
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form6Example5">start in </label>
-
-          <input type="date" class="form-control" name="startdate" id="my-date-input" name="my-date" required>        
-      
-        </div>
-
-
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form6Example5">end in </label>
-
-          <input type="date" class="form-control" name="enddate" id="my-date-input" name="my-date" required>        
-      
-        </div>
-
-
-        <!-- Number input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="form6Example6">image </label>
-
-          <input type="file" id="form6Example6" name="img" accept="image/*" class="form-control" /  multiple required>
-        </div>
-      
-        <!-- Message input -->
-  
-      
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">add</button>
-      </form>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block mb-4">add</button>
+          </div>   
+        </form>
+      </center>  
  
     </div>
 

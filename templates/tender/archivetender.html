@@ -1,0 +1,307 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tenders</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static   'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static  'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Vendor CSS Files -->
+  <link href="{% static  'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static  ' assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <style>
+    .card-text {
+      color: 	#0000FF;
+      font-size: 20px;
+      padding-top:5px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center"  style="background-color:black;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
+
+        <h1>safakat <span></span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar" >
+        <ul>
+          <li><a href="{% url 'Home' %}" class="active">Home</a></li>
+
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+    <section id="" class="">
+      <div class="container text-center" style="padding-top:50px;">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-sm-12 col-md-4 mb-2">
+              <input type="text" name="tittle" class="form-control" id="inputPassword" placeholder="search by keywords">
+            </div>
+            <div class="col-sm-12 col-md-4 mb-2">
+              <div class="form-outline">
+                  <select class="form-select" name="state" aria-label="Default select example" >
+                    <option value="" >state</option>
+                    <option value="Adrar">Adrar</option>
+                    <option value="Chlef">Chlef</option>
+                    <option value="Laghouat">Laghouat</option>
+                    <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+                    <option value="Batna">Batna</option>
+                    <option value="Béjaïa">Béjaïa</option>
+                    <option value="Biskra">Biskra</option>
+                    <option value="Béchar">	Béchar</option>
+                    <option value="Blida">Blida</option>
+                    <option value="Bouïra">Bouïra</option>
+                    <option value="Tamanrasset">Tamanrasset</option>
+                    <option value="	Tébessa">	Tébessa</option>
+                    <option value="Tlemcen">Tlemcen</option>
+                    <option value="Tiaret">Tiaret</option>
+                    <option value="Tlemcen">Tlemcen</option>
+                    <option value="Tizi Ouzou">Tizi Ouzou</option>
+                    <option value="Tlemcen">Tlemcen</option>
+                    <option value="	Algiers">	Algiers</option>
+                    <option value="	Jijel">	Jijel</option>
+                    <option value="Sétif">Sétif</option>
+                    <option value="Saïda">	Saïda</option>
+                    <option value="Skikda">	Skikda</option>
+                    <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                    <option value="	Annaba">	Annaba</option>
+                    <option value="	Guelma">	Guelma</option>
+                    <option value="Constantine">Constantine</option>
+                    <option value="Médéa">Médéa</option>
+                    <option value="Mostaganem">Mostaganem</option>
+                    <option value="	M'Sila">	M'Sila</option>
+                    <option value="Mascara">Mascara</option>
+                    <option value="	Ouargla">	Ouargla</option>
+                    <option value="Oran">Oran</option>
+                    <option value="	El Bayadh">	El Bayadh</option>
+                    <option value="Illizi">Illizi</option>
+                    <option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
+                    <option value="	Boumerdès">	Boumerdès</option>
+                    <option value="	El Tarf">	El Tarf</option>
+                    <option value="Tindouf">Tindouf</option>
+                    <option value="Tissemsilt">Tissemsilt</option>
+                    <option value="El Oued">El Oued</option>
+                    <option value="Khenchela">Khenchela</option>
+                    <option value="Souk Ahras">Souk Ahras</option>
+                    <option value="Tipaza">Tipaza</option>
+                    <option value="	Mila">	Mila</option>
+                    <option value="	Aïn Defla">	Aïn Defla</option>
+                    <option value="	Naâma">	Naâma</option>
+                    <option value="Aïn Témouchent">Aïn Témouchent</option>
+                    <option value="El M'Ghair">El M'Ghair</option>
+                    <option value="Relizane">Relizane</option>
+                    <option value="El M'Ghair">El M'Ghair</option>
+                    <option value="	Ouled Djellal">	Ouled Djellal</option>
+                    <option value="Bordj Baji Mokhtar">Bordj Baji Mokhtar</option>
+                    <option value="	Béni Abbès">	Béni Abbès</option>
+                    <option value="	Touggourt">	Touggourt</option>
+                    <option value="Djanet">Djanet</option>
+                    <option value="Ain Salah">Ain Salah</option>
+                    <option value="Ain Guezzam">Ain Guezzam</option>
+                    
+        
+                  </select>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-2">
+              <select class="form-select" name="sectors" aria-label="Default select example">
+                <option value="">{% trans 'sectors' %}</option>
+                {% for c in Ch %}
+                <option value="{{c.id}}">{{c.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-6 mb-2">
+              <input type="text" class="form-control" name="datefilter" value="" placeholder="date">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-2">
+              <button type="submit" class="btn btn-primary w-100" >{% trans 'search' %}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+          
+
+            <div class="container">
+              {% for t in tenders  %}
+              
+              <div class="d-flex justify-content-center " style="padding-top:10px;">
+                <div class="card text-center " style="height: 225px; width: 610px;">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                    
+                        <i class="bi bi-building">
+                      {{t.tittle}}
+                         </i>
+                         <div class="col-3">
+                            <h5 style="color:red;"> expired  </h5>
+                         </div>   
+                    </h5>                         
+                        <div class="row">
+                          <div class="col">
+                              <div class="col-4">
+                                <i class="bi bi-lightning-charge"></i>  
+
+                              {% for tt in t.sectoer.all  %}
+                                <div class="row">
+                                  <p class="text-muted"> {{tt}}</p>
+                                </div>
+
+                              {% endfor %}
+
+                              </div>
+
+                            </div>
+
+
+                            <div class="col-4">
+                              <i class="bi bi-geo-alt"> <p class="text-muted"> {{t.state}} </p>  </i>     
+                            </div>    
+
+                            <div class="col-4">
+                              <i class="bi bi-calendar3"> <p class="text-muted"> {{t.start_date}} </p>  </i>     
+                            </div> 
+                            
+                            
+                            <div class="row" style="padding-top:10px;">
+
+                              <a href="{% url 'archive_details_tender' id=t.id %}" class="btn btn-primary" style="background-color:#DAA520;	">Go Details</a>
+                            </div>
+
+
+                      </div>
+
+
+
+
+                  </div>
+                </div>
+
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>  
+
+
+    
+        
+
+    </section>
+ 
+
+
+
+
+
+  <script src="{% static  'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static  'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static  'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static  'assets/js/main.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'auto', // Automatically detect the user's browser language
+        includedLanguages: 'en,fr,ar', // List of languages to include in the dropdown
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
+      }, 'google_translate_element');
+    }
+  </script> 
+
+  <script type="text/javascript">
+    $(function() {
+    
+      $('input[name="datefilter"]').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+              cancelLabel: 'Clear'
+          }
+      });
+    
+      $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      });
+    
+      $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+      });
+    
+    });
+    </script>
+
+
+
+
+ <script>
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+ 
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+    });
+</script> 
+  
+  
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+
+
+
+
+
+
+
+</body>
+
+</html>

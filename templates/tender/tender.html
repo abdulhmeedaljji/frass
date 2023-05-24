@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <style>
     .card-text {
       color: 	#0000FF;
@@ -47,20 +48,16 @@
   <header id="header" class="header d-flex align-items-center"  style="background-color:black;">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
 
-        <h1>Farss<span>.</span></h1>
+        <h1>safakat <span></span></h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar" >
         <ul>
-          <li><a href="{% url 'Home' %}" class="active">Home</a></li>
-          <li><a href="#About">About</a></li>
-          <li><a href="#Servicess">Services</a></li>
-          <li><a href="#prcice">prices</a></li>
-          <div id="google_translate_element"> </div>
+          <li><a href="{% url 'Home' %}" class="active">{% trans 'Home' %}</a></li>
 
         </ul>
       </nav><!-- .navbar -->
@@ -68,79 +65,157 @@
     </div>
   </header><!-- End Header -->
 
+
+
+  
+
     <section id="" class="">
-            <div class="container text-center" style="padding-top:50px;">
-              <form method= "POST">
-                {% csrf_token %}
 
-                <div class="row">
-                  <div class="col-3">
-                    <input type="text" name="tittle" class="form-control" id="inputPassword" placeholder="search by keywords " >
-                  </div>
-
-                  <div class="col-3">
-                    <input type="text" name="state" class="form-control" id="inputPassword" placeholder="state " >
-                  </div>      
-                  <div class="col-3">
-
-                    <select class="form-select" name="sectors" aria-label="Default select example">
-                      <option value="">state</option>
-
-                      {% for c in Ch %}
-
-                      <option value="{{c.id}}">{{c.name}}</option>
-                      {% endfor %}
-                    </select>
-
-                  </div>
-
-                  <div class="col-3">
-                    <input type="date" name="dates" class="form-control" id="inputPassword" placeholder="date " >
-                  </div>
-
-
-                  <div class="col">
-                    <button type="submit" class="btn btn-primary" style="">search</button>
-                  </div>
-
-                </div>
-             </form>
+      
+      <div class="container text-center" style="padding-top:50px;">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-sm-12 col-md-4 mb-2">
+              <input type="text" name="tittle" class="form-control" id="inputPassword" placeholder="search by keywords">
             </div>
+            <div class="col-sm-12 col-md-4 mb-2">
+              <div class="form-outline">
+                  <select class="form-select" name="state" aria-label="Default select example" >
+                    <option value="" >state</option>
+                    <option value="Adrar">{% trans 'Adrar' %}</option>
+                    <option value="Chlef">{% trans 'Chlef' %}</option>
+                    <option value="Laghouat">{% trans 'Laghouat' %}</option>
+                    <option value="Oum El Bouaghi">{% trans 'Oum El Bouaghi' %}</option>
+                    <option value="Batna">{% trans 'Batna' %}</option>
+                    <option value="Béjaïa">{% trans 'Béjaïa' %}</option>
+                    <option value="Biskra">{% trans 'Biskra' %}</option>
+                    <option value="Béchar">{% trans  'Béchar' %}</option>
+                    <option value="Blida">{% trans 'Blida' %}</option>
+                    <option value="Bouïra">{% trans 'Bouïra' %}</option>
+                    <option value="Tamanrasset">{% trans 'Tamanrasset' %}</option>
+                    <option value="	Tébessa">{% trans 	'Tébessa' %}</option>
+                    <option value="Tlemcen">{% trans 'Tlemcen' %}</option>
+                    <option value="Tiaret">{% trans 'Tiaret' %}</option>
+                    <option value="Tlemcen">{% trans 'Tlemcen' %}</option>
+                    <option value="Tizi Ouzou">{% trans 'Tizi Ouzou' %}</option>
+                    <option value="Tlemcen">{% trans 'Tlemcen' %}</option>
+                    <option value="	Algiers">{% trans 	'Algiers' %}</option>
+                    <option value="	Jijel">{% trans 	'Jijel' %}</option>
+                    <option value="Sétif">{% trans 'Sétif' %}</option>
+                    <option value="Saïda">{% trans 'Saïda' %}</option>
+                    <option value="Skikda">{% trans 'Skikda' %}</option>
+                    <option value="Sidi Bel Abbès">{% trans 'Sidi Bel Abbès' %}</option>
+                    <option value="	Annaba">{% trans 'Annaba' %}</option>
+                    <option value="	Guelma">{% trans 	'Guelma' %}</option>
+                    <option value="Constantine">{% trans 'Constantine' %}</option>
+                    <option value="Médéa">{% trans 'Médéa' %}</option>
+                    <option value="Mostaganem">{% trans 'Mostaganem' %}</option>
+                    <option value="	M'Sila">{% trans 	"M'Sila" %}</option>
+                    <option value="Mascara">{% trans 'Mascara' %}</option>
+                    <option value="	Ouargla">{% trans 'Ouargla' %}</option>
+                    <option value="Oran">{% trans 'Oran' %}</option>
+                    <option value="	El Bayadh">{% trans 'El Bayadh' %}</option>
+                    <option value="Illizi">{% trans 'Illizi' %}</option>
+                    <option value="Bordj Bou Arréridj">{% trans 'Bordj Bou Arréridj' %}</option>
+                    <option value="	Boumerdès">{% trans 	'Boumerdès' %}</option>
+                    <option value="	El Tarf">{% trans 	'El Tarf' %}</option>
+                    <option value="Tindouf">{% trans 'Tindouf' %}</option>
+                    <option value="Tissemsilt">{% trans 'Tissemsilt' %}</option>
+                    <option value="El Oued">{% trans 'El Oued' %}</option>
+                    <option value="Khenchela">{% trans 'Khenchela' %}</option>
+                    <option value="Souk Ahras">{% trans 'Souk Ahras' %}</option>
+                    <option value="Tipaza">{% trans 'Tipaza' %}</option>
+                    <option value="	Mila">{% trans 	'Mila' %}</option>
+                    <option value="	Aïn Defla">{% trans 'Aïn Defla' %}</option>
+                    <option value="	Naâma">{% trans 'Naâma' %}</option>
+                    <option value="Aïn Témouchent">{% trans 'Aïn Témouchent' %}</option>
+                    <option value="El M'Ghair">{% trans "El M'Ghair" %}</option>
+                    <option value="Relizane">{% trans 'Relizane' %}</option>
+                    <option value="El M'Ghair">{% trans 'El M "Ghair' %}</option>
+                    <option value="	Ouled Djellal">{% trans 	'Ouled Djellal' %}</option>
+                    <option value="Bordj Baji Mokhtar">{% trans 'Bordj Baji Mokhtar' %}</option>
+                    <option value="	Béni Abbès">{% trans 	'Béni Abbès' %}</option>
+                    <option value="	Touggourt">{% trans 'Touggourt' %}</option>
+                    <option value="Djanet">{% trans 'Djanet' %}</option>
+                    <option value="Ain Salah">{% trans 'Ain Salah' %}</option>
+                    <option value="Ain Guezzam">{% trans 'Ain Guezzam' %}</option>
+                    
+        
+                  </select>
+                </select>
+
+
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 mb-2">
+              <select class="form-select" name="sectors" aria-label="Default select example">
+                <option value="">{% trans 'sectors' %}</option>
+                {% for c in Ch %}
+                <option value="{{c.id}}">{{c.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-6 mb-2">
+              <input type="text" class="form-control" name="datefilter" value="" placeholder="date">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-2">
+              <button type="submit" class="btn btn-primary w-100" >{% trans 'search' %}</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="col-3">
+          <i class="bi bi-archive"></i>
+          <a href="{% url 'tenderarchivr' %}">
+            <h5 style="color:#DAA520;" > tender archive  </h5>
+          </a> 
+         
+        </div>  
+
+      </div>
+          
 
             <div class="container">
               {% for t in tenders  %}
               
               <div class="d-flex justify-content-center " style="padding-top:10px;">
-                <div class="card text-center " style="height: 200px; width: 600px;">
+                <div class="card text-center " style="height: 225px; width: 610px;">
                   <div class="card-body">
-                    <h5 class="card-title">{{t.tittle}}</h5>
-                         
+                    <h5 class="card-title"><i class="bi bi-building">
+                      {{t.tittle}}
+
+                    </i>
+                    </h5>                         
                         <div class="row">
                           <div class="col">
-                              <div class="col-3">
+                              <div class="col-4">
                                 <i class="bi bi-lightning-charge"></i>  
 
                               {% for tt in t.sectoer.all  %}
-  
-                                <p class="text-muted"> {{tt}}</p>
+                                <div class="row">
+                                  <p class="text-muted"> {{tt}}</p>
+                                </div>
+
                               {% endfor %}
 
                               </div>
 
                             </div>
 
-                
 
-
-
-                            <div class="col">
+                            <div class="col-4">
                               <i class="bi bi-geo-alt"> <p class="text-muted"> {{t.state}} </p>  </i>     
                             </div>    
-                            
-                            
-                            <div class="" style="padding-bottom:-5px;">
 
-                              <a href="{% url 'tenderdetaile' id=t.id %}" class="btn btn-primary">Go Details</a>
+                            <div class="col-4">
+                              <i class="bi bi-calendar3"> <p class="text-muted"> {{t.start_date}} </p>  </i>     
+                            </div> 
+                            
+                            
+                            <div class="row" style="padding-top:10px;">
+
+                              <a href="{% url 'tenderdetaile' id=t.id %}" class="btn btn-primary" style="background-color:#DAA520;	">{% trans 'Go Details' %}</a>
                             </div>
 
 
@@ -179,8 +254,11 @@
 
   <!-- Template Main JS File -->
   <script src="{% static  'assets/js/main.js' %}"></script>
-
-
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
   <script type="text/javascript">
     function googleTranslateElementInit() {
@@ -191,6 +269,41 @@
       }, 'google_translate_element');
     }
   </script> 
+
+  <script type="text/javascript">
+    $(function() {
+    
+      $('input[name="datefilter"]').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+              cancelLabel: 'Clear'
+          }
+      });
+    
+      $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      });
+    
+      $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+      });
+    
+    });
+    </script>
+
+
+
+
+ <script>
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+ 
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+    });
+</script> 
   
   
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 

@@ -1,13 +1,13 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import CustomUser,tender,Choice
+from .models import CustomUser,tender,Choice,ArchiveFile,Archivetender
 # Create your views here.
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from datetime import date, timedelta
 from .models import Subscription,tender,File,SECTOER_CHOICES
-from .decorators import cheak_user_subscription
+from .decorators import cheak_user_subscription,cheak_tender_subscription
 from django.db.models import Q
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -95,6 +95,39 @@ def logout_view(request):
     return redirect("Home")
 
 
+
+
+def add_newuser_dashboard(request):
+    print("add_newuser_dashboard")
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        sectors=request.POST.getlist('sectors[]')
+
+        start_date = datetime.strptime(request.POST.get('start_date'), '%Y-%m-%d').date()
+        end_date = datetime.strptime(request.POST.get('end_date'), '%Y-%m-%d').date()
+        active = bool(request.POST.get('active'))
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists")
+            return redirect(Dashboard)
+
+        if User.objects.filter(phone_number=phone).exists():
+            messages.error(request, "phone  already exists")
+            return redirect(Dashboard)
+
+
+
+        user = CustomUser.objects.create_user(username=email, email=email, password=password, phone_number=phone)
+
+        # Create a new subscription
+        subscription = Subscription.objects.create(user=user, tittle="", start_date=start_date, end_date=end_date, activite=active)
+        
+        for sector in sectors:
+            subscription.plan.add(sector)
+        
+        return redirect('dashboard')
 
 
 def reset_password(request):
@@ -297,6 +330,7 @@ def userProfile(request):
     print(subscription)
     return render(request,"userprofile.html",{'user_name':user_name,"subscription":subscription })
 
+from datetime import datetime
 
 def tenders_main(request):
     if request.method == "POST":
@@ -304,10 +338,49 @@ def tenders_main(request):
 
         tittle=request.POST.get('tittle')
         state=request.POST.get('state')
-        sectors=request.POST.get('sectors')
-        dates=request.POST.get('dates')
+        sectors=request.POST.get('sectors')        
+        date_range_str = request.POST.get('datefilter')
         
- 
+        if date_range_str =="":
+            start_date =""
+            end_date = ""
+        
+        if not date_range_str =="":                     
+            start_date_str, end_date_str = date_range_str.split(' - ')
+            start_date = datetime.strptime(start_date_str, '%m/%d/%Y').date()
+            end_date = datetime.strptime(end_date_str, '%m/%d/%Y').date()
+                              
+   
+        user_have_sub=Subscription.objects.filter(user_id=request.user.id).exists()
+        if  user_have_sub:
+            categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
+            Ch=Choice.objects.all()
+            tenders = tender.objects.filter(sectoer__id__in=categres).order_by('-start_date')
+            
+            if not sectors=="":    
+             q= Q(sectoer=sectors )
+             tenders = tender.objects.filter(q)
+
+            if not tittle=="":
+                q=Q(tittle__icontains=tittle ) 
+                tenders = tender.objects.filter(q)
+                
+            if not state=="":
+                q=Q(state__icontains=state ) 
+                tenders = tender.objects.filter(q)
+                
+            if not start_date=="" :    
+                q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
+                tenders = tender.objects.filter(q)          
+    
+                
+            return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
+        
+        
+        
+        
+        tenders = tender.objects.all().order_by('-start_date')
+
         if not sectors=="":    
             q= Q(sectoer=sectors )
             tenders = tender.objects.filter(q)
@@ -317,12 +390,12 @@ def tenders_main(request):
             tenders = tender.objects.filter(q)
             
         if not state=="":
-            q=Q(state__icontains=tittle ) 
+            q=Q(state__icontains=state ) 
             tenders = tender.objects.filter(q)
             
-        if not dates=="":
-            q=Q(start_date__icontains=tittle ) 
-            tenders = tender.objects.filter(q)          
+        if not start_date=="":
+            q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
+            tenders = tender.objects.filter(q,user_id=request.user.id).values_list('plan', flat=True)          
 
     
         return render(request,"tender/tender.html",{'tenders':tenders ,  "Ch":Ch})
@@ -331,13 +404,104 @@ def tenders_main(request):
         if  user_have_sub:
             categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
             Ch=Choice.objects.all()
-
-            tenders = tender.objects.filter(sectoer__id__in=categres)
+            tenders = tender.objects.filter(sectoer__id__in=categres).order_by('-start_date')
+            
+            if len(tenders)== 0:
+                tenders = tender.objects.all().order_by('-start_date')
             return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
            
-    tenders=tender.objects.all()
+    tenders=tender.objects.all().order_by('-start_date')
     Ch=Choice.objects.all()
     return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
+
+
+
+
+
+def tenders_archive_main(request):
+    if request.method == "POST":
+        Ch=Choice.objects.all()
+
+        tittle=request.POST.get('tittle')
+        state=request.POST.get('state')
+        sectors=request.POST.get('sectors')        
+        date_range_str = request.POST.get('datefilter')
+        
+        if date_range_str =="":
+            start_date =""
+            end_date = ""
+        
+        if not date_range_str =="":                     
+            start_date_str, end_date_str = date_range_str.split(' - ')
+            start_date = datetime.strptime(start_date_str, '%m/%d/%Y').date()
+            end_date = datetime.strptime(end_date_str, '%m/%d/%Y').date()
+                              
+   
+        user_have_sub=Subscription.objects.filter(user_id=request.user.id).exists()
+        if  user_have_sub:
+            categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
+            Ch=Choice.objects.all()
+            tenders = Archivetender.objects.filter(sectoer__id__in=categres).order_by('-start_date')
+            
+            if not sectors=="":    
+             q= Q(sectoer=sectors )
+             tenders = Archivetender.objects.filter(q)
+
+            if not tittle=="":
+                q=Q(tittle__icontains=tittle ) 
+                tenders = Archivetender.objects.filter(q)
+                
+            if not state=="":
+                q=Q(state__icontains=state ) 
+                tenders = Archivetender.objects.filter(q)
+                
+            if not start_date=="" :    
+                q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
+                tenders = Archivetender.objects.filter(q)          
+    
+                
+            return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
+        
+        
+        
+        
+        tenders = Archivetender.objects.all().order_by('-start_date')
+
+        if not sectors=="":    
+            q= Q(sectoer=sectors )
+            tenders = Archivetender.objects.filter(q)
+
+        if not tittle=="":
+            q=Q(tittle__icontains=tittle ) 
+            tenders = Archivetender.objects.filter(q)
+            
+        if not state=="":
+            q=Q(state__icontains=state ) 
+            tenders = Archivetender.objects.filter(q)
+            
+        if not start_date=="":
+            q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
+            tenders = Archivetender.objects.filter(q,user_id=request.user.id).values_list('plan', flat=True)          
+
+    
+        return render(request,"tender/archivetender.html",{'tenders':tenders ,  "Ch":Ch})
+    else:
+        user_have_sub=Subscription.objects.filter(user_id=request.user.id).exists()
+        if  user_have_sub:
+            categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
+            Ch=Choice.objects.all()
+            tenders = Archivetender.objects.filter(sectoer__id__in=categres).order_by('-start_date')
+            
+            if len(tenders)== 0:
+                tenders = Archivetender.objects.all().order_by('-start_date')
+            return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
+           
+    tenders=Archivetender.objects.all().order_by('-start_date')
+    Ch=Choice.objects.all()
+    return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
+
+
+
 
 
 
@@ -359,6 +523,22 @@ def details_tender(request,id):
     file_objs = tender_detailss.file_set.all()
   
     return render(request,"tender/tender_detail.html",{'tender_details':tender_details, "file_objs":file_objs })
+
+
+
+
+@cheak_tender_subscription()
+def archive_details_tender(request,id):
+    tender_details =Archivetender.objects.filter(id=id)
+
+    tender_detailss =Archivetender.objects.get(id=id)
+    file_objs = ArchiveFile.objects.filter(archive_tender=tender_detailss)
+
+  
+    return render(request,"tender/archivetender_details.html",{'tender_details':tender_details, "file_objs":file_objs })
+
+
+
 
 
 
@@ -497,10 +677,9 @@ def update_tender_dashboard(request,id):
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         state = request.POST.get('state')
-        sectors = request.POST.getlist('sectors[]')
+        sectorss = request.POST.getlist('sectors[]')
 
-        if image == "":
-            image = tender.objects.filter(id=id).getlist('image')
+
         
         if title == "":
             title = tender.objects.filter(id=id).values('tittle')
@@ -512,40 +691,57 @@ def update_tender_dashboard(request,id):
             end_date = tender.objects.filter(id=id).values('end_date')
             
         if state == "":
+            print("Please select name from seleeeeeeeeeeeeeeeee")
             state = tender.objects.filter(id=id).values('state')
            
-        if sectors == "":
-            sectors = tender.objects.filter(id=id).values_list('sectors')
-              
+          
        
         tenders.tittle = title
         tenders.start_date = start_date
         tenders.end_time = end_date
         tenders.state = state
         
-        tenders.sectoer.clear()
-
-        for p in sectors:
-            tenders.sectoer.add(p)
-               
-        
         tenders.save()
         
-        
-        tenders.file_set.all().delete()
+        if len(sectorss)== 0:
+            sectorss = tender.objects.filter(id=id).values_list('sectoer__id', flat=True).distinct()        
+            print("enter  to the sectore ")
+            print(sectorss)
+    
+    
+        if sectorss:
+            tenders.sectoer.clear()
+            for p in sectorss:
+                #  choices = Choice.objects.filter(id=p)
+                #  print(choices)
+                    tenders.sectoer.add(p)
 
-        
-                   
-        
-        for file in image:
-            new_file = File.objects.create(
-            tender=tenders,
-            file=file
-            )
-        
-            new_file.save()
+               
         
         
+
+        if len(image) == 0:
+            image=File.objects.filter(tender=tenders).values_list("file",flat=True).distinct()
+            print("ENTER HERE TO ")
+            print(image)
+            
+        if isinstance(image, str):
+          image = [image]            
+
+
+        if image:
+            tenders.file_set.all().delete()
+            new_files = []
+            for filee in set(image):
+                new_file = File.objects.create(
+                    tender=tenders,
+                    file=filee
+                )
+                new_file.save()
+                new_files.append(new_file)
+                print("add imge len")
+                print(len(image))
+                
      
         
     return redirect(Dashboard)

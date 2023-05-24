@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Algeria</title>
+  <title>safakat dz</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -52,7 +52,7 @@
 
       <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
     
-        <h1>Farss<span>.</span></h1>
+        <h1>safakat <span>.</span></h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -60,12 +60,16 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="" class="active">{% trans  'Home' %} </a></li>
-          <li><a href="{% url 'dashboard' %}">dashboard</a></li>
+
+          {% if request.user.is_superuser %}
+              <li><a href="{% url 'dashboard' %}"> {% trans 'dashboard'   %} </a></li>
+
+          {% endif %}    
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
           {% if request.user.is_superuser %}
 
-           <li><a href="{% url 'added_tender' %}"> {% trans 'added' %}  </a></li>
+           <li><a href="{% url 'added_tender' %}"> {% trans 'add tender' %}  </a></li>
 
           {% endif %}
 
@@ -80,7 +84,24 @@
 
           {% endif %}
 
-          <div id="google_translate_element"> </div>
+          {% comment %} <div id="google_translate_element"> </div> {% endcomment %}
+          <li>
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+              </select>
+              <input type="submit" value="Go">
+          </form>
+
+          </li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -101,8 +122,8 @@
       <div class="carousel-item active" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-1.jpg' %})">
         <div class="carousel-caption" style="margin-bottom:200px;">
 
-          <h1> <strong> Welcome to  </strong> Frass</h1>
-          <p>This is best site for tender </p>
+          <h1> <strong> {% trans   'Welcome to' %} </strong> safakat</h1>
+          <p>{% trans 'This is best site for tender' %}</p>
           <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
         </div>
 
@@ -110,15 +131,15 @@
       <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-2.jpg' %})">
           <div class="carousel-caption" style="margin-bottom:200px;">
           
-          <h1>  <strong> Welcome to  </strong> Frass</h1>
-          <p>This is best site for tender </p>
+          <h1>  <strong> {% trans   'Welcome to' %}  </strong> safakat</h1>
+          <p>{% trans 'This is best site for tender' %} </p>
           <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
         </div>
       </div>
       <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-3.jpg' %})">
         <div class="carousel-caption" style="margin-bottom:200px;">  
-          <h1>  <strong> Welcome to  </strong> Frass</h1>
-          <p>This is best site for tender </p>
+          <h1>  <strong>  {% trans   'Welcome to' %}</strong> safakat</h1>
+          <p>{% trans 'This is best site for tender' %} </p>
           <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
         </div>
       </div>
@@ -177,7 +198,7 @@
 
         <div class="section-header">
           <h2 id="About">About</h2>
-          <h3>WHO ARE WE ?</h3>
+          <h3>{% trans 'WHO ARE WE ?' %}</h3>
         </div>
         <div class="row gy-4  justify-content-center" >
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100"  style="width:800px; ">
@@ -188,8 +209,8 @@
                 </div>
                 <div class="col-xl-7 d-flex align-items-center  ">
                   <div class="card-body">
-                    <h4 class="card-title"> frass is platform.</h4>
-                    <p>is the best professional site that offers a shortcut to the ALGERIAN PUBLIC & PRIVATE markets. In addition to the NOTICES of CALLS FOR TENDERS, Our site publishes the follow-up of the life cycle of the projects AWARDS, CANCELLATIONS, INFRUCTUOSITIES, NOTICES OF DEMAND & TERMINATIONS.</p>
+                    <h4 class="card-title">{% trans 'safakat is platform' %}.</h4>
+                    <p>{% trans 'is the best professional site that offers a shortcut to the ALGERIAN PUBLIC & PRIVATE markets. In addition to the NOTICES of CALLS FOR TENDERS, Our site publishes the follow-up of the life cycle of the projects AWARDS, CANCELLATIONS, INFRUCTUOSITIES, NOTICES OF DEMAND & TERMINATIONS.' %}</p>
                   </div>
                 </div>
               </div>
@@ -204,8 +225,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2 id="Servicess"  >Services</h2>
-          <p> we provied our customer with </p>
+          <h2 id="Servicess"  >{% trans 'Services' %}</h2>
+          <p>{% trans 'we provied our customer with' %}</p>
         </div>
 
         <div class="row gy-4">
@@ -215,7 +236,7 @@
               <div class="icon">
                 <i class="fa-solid fa-arrow-up-from-ground-water"></i>
               </div>
-              <h3>get all tenders across the entire national territory </h3>
+              <h3>{% trans ' get all tenders across the entire national'  %}</h3>
            
             </div>
           </div><!-- End Service Item -->
@@ -225,7 +246,7 @@
               <div class="icon">
                 <i class="bi bi-activity"></i>
               </div>
-              <h3>Daily and reliable data across the entire states of Algeria</h3>            
+              <h3>{% trans 'Daily and reliable data across the entire states of Algeria' %}</h3>            
             </div>
           </div><!-- End Service Item -->
 
@@ -234,7 +255,7 @@
               <div class="icon">
                 <i class="bi bi-cart"></i>
               </div>
-              <h3>Competitive prices and convenient payment methods</h3>          
+              <h3>{% trans 'Competitive prices and convenient payment methods' %}</h3>          
             </div>
           </div><!-- End Service Item -->
         </div>
@@ -248,7 +269,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Last tender added</h2>
+          <h2>{% trans 'Last tender added' %}</h2>
         </div>
 
         <div class="slides-2 swiper">
@@ -314,22 +335,22 @@
       <div class=" section-header" >
 
         <h2 id="prcice">OUR PRICES AND PLANS</h2>
-        <p>We offer a range of subscription packages thcard-text at provide users with many features</p>
+        <p>{% trans 'We offer a range of subscription packages thcard-text at provide users with many features' %}</p>
       </div>
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col-12">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title text-center">Studies and laboratories</h5>
+              <h5 class="card-title text-center">{% trans 'Studies and laboratories' %}</h5>
               <p class="card-text  text-center">15,000 DZD including TAX.</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">up to 1 categories</li>
-              <li class="list-group-item text-center">can select the categories </li>
+              <li class="list-group-item text-center">{% trans 'up to 1 categories' %}</li>
+              <li class="list-group-item text-center">{% trans 'can select the categories' %}</li>
             </ul>
             <div class="card-footer">
-              <center>   <a href="{% url 'BasicSubscriptionView' 'Basic'  %}" class="btn btn-primary">Register</a> </center>
+              <center>   <a href="{% url 'BasicSubscriptionView' 'Basic'  %}" class="btn btn-primary">{% trans 'Register' %}</a> </center>
             </div>
           </div>
         </div>
@@ -419,10 +440,10 @@
             <div class="footer-info">
               <h3>Frass</h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                 <br>
+                 Algeria<br><br>
+                <strong>Phone:</strong> +*********** <br>
+                <strong>Email:</strong> support@safakat.com<br>
               </p>
               <div class="social-links d-flex mt-3">
                 <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>

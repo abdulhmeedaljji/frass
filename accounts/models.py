@@ -55,7 +55,7 @@ class Subscription(models.Model):
     img_transition = models.ImageField(upload_to='images/',null=True, blank=True)
     
     def __str__(self):
-        return f"{self.user} "
+        return f"{self.user}    "
     
     
     
@@ -83,5 +83,24 @@ class File(models.Model):
 
 
 
+class Archivetender(models.Model):
+    tittle=models.CharField(max_length=150)    
+    start_date = models.DateField(blank=True, null=True)
+    end_time=models.DateField()
+    state=models.CharField(max_length=150)
+    sectoer = models.ManyToManyField(Choice)
+    activity=models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.tittle  + " in " +  self.state 
+    
+    
+   
+   
+   
+class ArchiveFile(models.Model):
+    archive_tender = models.ForeignKey(Archivetender, on_delete=models.CASCADE)
+    archive_file = models.ImageField(upload_to='tender/')
+    
     
     
