@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from .views import tenders_main
 from django.conf.urls.i18n import i18n_patterns
-from .views  import tenders_archive_main,add_newuser_dashboard ,delete_sector_from_dashboard,add_sectoer,change_password,reset_password, added_tender,Dashboard,delete_subrcption_from_dashboard,update_tender_dashboard,delete_usersubrcption_from_dashboard,update_suburption_dashboard
+from .views  import delete_basic_user_from_dashboard,need_suburcption,tenders_archive_main,add_newuser_dashboard ,delete_sector_from_dashboard,add_sectoer,change_password,reset_password, added_tender,Dashboard,delete_subrcption_from_dashboard,update_tender_dashboard,delete_usersubrcption_from_dashboard,update_suburption_dashboard
 
 
 
@@ -26,22 +26,30 @@ urlpatterns =  [
     path('tender/', tenders_main, name='tender'),
     path('tenderarchivr/', tenders_archive_main, name='tenderarchivr'),
     path('tenderdetaile/<int:id>/', details_tender, name='tenderdetaile'),
+    path('tenderdetaile/<int:id>/', details_tender, name='tenderdetaile'),
 
     
     path('archive_details_tender/<int:id>/', archive_details_tender, name='archive_details_tender'),
     path('tender_prevent', tender_prevent, name='tender_prevent'),
     path('userprofile/',userProfile,name="userprofile"),
-    path('upgrade_subscripition', upgrade_subs, name='upgrade_subscripition'),
     path('added_tender', added_tender, name='added_tender'),
     path('dashboard', Dashboard, name='dashboard'),
+    
+    
+    
     path('update_tender_dashboard/<int:id>/', update_tender_dashboard, name='update_tender_dashboard'),
     path('update_suburption_dashboard/<int:id>/', update_suburption_dashboard, name='update_suburption_dashboard'),
     
+    
+    path('need_suburcption/', need_suburcption, name='need_suburcption'),
+
     path('add_sectoer/', add_sectoer, name='add_sectoer'),
     path('add_newuser_dashboard/', add_newuser_dashboard, name='add_newuser_dashboard'),
 
 
     path('delect_setore_dashboard/<int:id>/', delete_sector_from_dashboard, name='delect_setore_dashboard'),
+    
+    path('delete_basic_user_from_dashboard/<int:id>/', delete_basic_user_from_dashboard, name='delete_basic_user_from_dashboard'),
 
     path('delect_user_dashboard/<int:id>/', delete_subrcption_from_dashboard, name='delect_user_dashboard'),
     path('delect_usersubration_dashboard/<int:id>/', delete_usersubrcption_from_dashboard, name='delect_usersubration_dashboard'),

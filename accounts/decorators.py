@@ -70,7 +70,7 @@ def cheak_user_subscription():
                       return redirect(reverse('tender_prevent'))
             else:
                 
-                 return redirect(reverse('Home'))
+                 return redirect(reverse('need_suburcption'))
                 
                 
         return wrapper
@@ -132,14 +132,14 @@ def cheak_tender_subscription():
                 
                  
                 if check :
-
                     # Redirect to error page or login page with error message
                     return view_func(request, *args, **kwargs)
                 else:
+                    
                       return redirect(reverse('tender_prevent'))
             else:
                 
-                 return redirect(reverse('Home'))
+                 return redirect(reverse('tender_prevent'))
                 
                 
         return wrapper

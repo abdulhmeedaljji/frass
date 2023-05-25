@@ -527,17 +527,20 @@ def details_tender(request,id):
 
 
 
-@cheak_tender_subscription()
+@cheak_user_subscription()
 def archive_details_tender(request,id):
     tender_details =Archivetender.objects.filter(id=id)
-
     tender_detailss =Archivetender.objects.get(id=id)
     file_objs = ArchiveFile.objects.filter(archive_tender=tender_detailss)
 
-  
+
     return render(request,"tender/archivetender_details.html",{'tender_details':tender_details, "file_objs":file_objs })
 
 
+
+
+def need_suburcption(request):
+    return render(request,"tender/tender_prvent_nosuburbtion.html")
 
 
 
@@ -602,6 +605,7 @@ def Dashboard(request):
         table_subscriptions_notactivite = Subscription.objects.all().filter(activite=False)
 
         table_tender_all = tender.objects.all()
+        table_all_user=CustomUser.objects.all()
         
         Choice_list =Choice.objects.all()
         
@@ -613,6 +617,9 @@ def Dashboard(request):
             "alluser":alluser,
             "notactivites":notactivites,
             "activiteaccount":activiteaccount,
+            "table_all_user":table_all_user,
+
+            
             
             "Bassicaccount":Bassicaccount,
             "Plan1account":Plan1account,
@@ -662,6 +669,12 @@ def delete_sector_from_dashboard(request,id):
     return redirect(Dashboard)
 
 
+
+
+def delete_basic_user_from_dashboard(request,id):
+    sectors = CustomUser.objects.get(id=id)
+    sectors.delete()
+    return redirect(Dashboard)
 
 
 
