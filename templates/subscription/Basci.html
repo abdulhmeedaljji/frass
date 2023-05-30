@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Subscription </title>
+  <title>safakat dz|Subscription register </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -63,10 +63,32 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar" >
         <ul>
-          <li><a href="{% url 'Home' %}" class="active">Home</a></li>
-          <li><a href="#About">About</a></li>
-          <li><a href="#Servicess">Services</a></li>
-          <li><a href="#prcice">prices</a></li>
+
+          <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
+          <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
+
+  	      {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
+	        {% endif %}
+
+          <li>
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+              </select>
+              <input type="submit" value="Go">
+           </form>
+
+          </li>
+       
         </ul>
       </nav><!-- .navbar -->
 
@@ -123,7 +145,7 @@
                   {% endfor %} 
                   <div class="col-6">
 
-                      <select class="form-select " id="multiple-select-clear-field" name="my-select[]" onchange="getSelectedCount()"  data-placeholder="Choose the sector you want subscription" multiple  >
+                      <select class="form-select " id="multiple-select-clear-field" name="my-select[]" onchange="getSelectedCount()"  data-placeholder="Choose the sector you want subscription" multiple  required >
                         {% for c in Ch %} 
 
                         <option value="{{c.id}}">{{c.name}}</option>
@@ -141,7 +163,7 @@
                 <div class="form-group row"style="padding-top:15px;">
                   <label for="exampleInput" class="col-sm-3 col-form-label">Prcice of theis subscription</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control  " id="exampleInput"  value="1600 DZ" readonly  >
+                    <input type="text" class="form-control  " id="exampleInput"  value="15000 DZ" readonly  >
                   </div>
                 </div>
 

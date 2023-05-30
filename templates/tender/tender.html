@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tenders</title>
+  <title>safakat dz|tenders</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -57,8 +57,30 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar" >
         <ul>
-          <li><a href="{% url 'Home' %}" class="active">{% trans 'Home' %}</a></li>
+          <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
+          <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
+  	      {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
+	        {% endif %}
+
+          <li>
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+              </select>
+              <input type="submit" value="Go">
+          </form>
+
+          </li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -182,22 +204,38 @@
               <div class="d-flex justify-content-center " style="padding-top:10px;">
                 <div class="card text-center " style="height: 225px; width: 610px;">
                   <div class="card-body">
+
+
+                    {% if LANGUAGE_CODE == "fr" or  LANGUAGE_CODE == "en"  %}
                     <h5 class="card-title"><i class="bi bi-building">
                       {{t.tittle}}
+                       </i>
+                    </h5> 
+                    {% endif %}
 
-                    </i>
-                    </h5>                         
+                    {% if LANGUAGE_CODE == "ar" %}
+
+                    <h5 class="card-title"><i class="bi bi-building">
+                      {{t.tittle_ar}}
+                       </i>
+                    </h5> 
+
+
+                    {% endif %}
+                    
+                    
+
                         <div class="row">
                           <div class="col">
-                              <div class="col-4">
+                              <div class="col-12">
                                 <i class="bi bi-lightning-charge"></i>  
 
-                              {% for tt in t.sectoer.all  %}
-                                <div class="row">
-                                  <p class="text-muted"> {{tt}}</p>
-                                </div>
+                                      {% for tt in t.sectoer.all  %}
+                                        <div class="row">
+                                          <p class="text-muted"> {{tt}}</p>
+                                        </div>
 
-                              {% endfor %}
+                                      {% endfor %}
 
                               </div>
 
@@ -212,19 +250,20 @@
                               <i class="bi bi-calendar3"> <p class="text-muted"> {{t.start_date}} </p>  </i>     
                             </div> 
                             
-                            
-                            <div class="row" style="padding-top:10px;">
-
-                              <a href="{% url 'tenderdetaile' id=t.id %}" class="btn btn-primary" style="background-color:#DAA520;	">{% trans 'Go Details' %}</a>
-                            </div>
+                 
 
 
                       </div>
 
+           
+                      {% comment %} <div class="row" style="padding-top:10px;"> {% endcomment %}
 
+                      {% comment %} </div> {% endcomment %}
 
 
                   </div>
+                  <a href="{% url 'tenderdetaile' id=t.id %}" class="btn btn-primary" style="background-color:#DAA520;	">{% trans 'Go Details' %}</a>
+
                 </div>
 
               </div>

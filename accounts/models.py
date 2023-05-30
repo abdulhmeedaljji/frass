@@ -62,6 +62,7 @@ class Subscription(models.Model):
     
 class tender(models.Model):
     tittle=models.CharField(max_length=150)    
+    tittle_ar=models.CharField(max_length=150,blank=True,null=True)    
     start_date = models.DateField(blank=True, null=True)
     end_time=models.DateField()
     state=models.CharField(max_length=150)

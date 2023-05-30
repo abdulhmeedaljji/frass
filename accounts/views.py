@@ -283,13 +283,17 @@ def added_tender(request):
         return redirect("Home")
     if request.method=="POST":
        tillle=request.POST.get('tittle')
+       tillle_ar=request.POST.get('tittlear')
+
        state=request.POST.get('state')
 
        sectors=request.POST.getlist('sectors[]')
        startdate=request.POST.get('startdate')
        enddate=request.POST.get('enddate')
        files = request.FILES.getlist('img')       
-       added=tender.objects.create(tittle=tillle,state=state,
+       added=tender.objects.create(tittle=tillle,
+                                   tittle_ar=tillle_ar,
+                                   state=state,
                                    start_date=startdate,           
                                    end_time=enddate,
                                    

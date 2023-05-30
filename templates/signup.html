@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Register</title>
+  <title>safakat dz|Register</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,6 +30,13 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+
+
+      <!-- Font Icon -->
+     <link rel="stylesheet" href="{% static  'signup/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+      <!-- Main css -->
+     <link rel="stylesheet" href="{% static  'signup/css/style.css'  %}">
 
   <style>
     .card-text {
@@ -57,11 +65,32 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar" >
         <ul>
-          <li><a href="{% url 'Home' %} " class="active">Home</a></li>
-          <li><a href="{% url 'Home' %}">About</a></li>
-          <li><a href="#Servicess">Services</a></li>
-          <li><a href="#prcice">prices</a></li>
-          <li><a href="{% url 'signup' %}">Register</a></li>
+
+
+          <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
+          <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
+
+  	      {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
+	        {% endif %}
+
+          <li>
+            {% comment %} <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                  <input name="next" type="hidden" value="{{ redirect_to }}">
+                  <select name="language">
+                      {% get_current_language as LANGUAGE_CODE %}
+                      {% get_available_languages as LANGUAGES %}
+                      {% get_language_info_list for LANGUAGES as languages %}
+                      {% for language in languages %}
+                          <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                              {{ language.name_local }} ({{ language.code }})
+                          </option>
+                      {% endfor %}
+                  </select>
+                  <input type="submit" value="Go">
+            </form> {% endcomment %}
+
+          </li>
 
  
         </ul>
@@ -74,43 +103,77 @@
 
   <section id="hero" class="hero">
 
-    <div class="info d-flex align-items-center">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            {% for msg in messages %}
-
-               <div class="alert alert-success" role="alert">
-                 {{msg}}
-               </div>
-           {% endfor %} 
+            
 
 
-            <h3 style="margin-bottom:10px;"> Register  </h3>
 
-            <form method="POST">
-                  {% csrf_token %} 
-                <div class="form-group">
-                  <label for="inputName">phone</label>
-                  <input type="tel" class="form-control" name="phone_number" id="inputName" placeholder="Enter your phone number" required>
+           <div class="main"  style="background-color:white;">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-img"  style="padding-top:75px;">
+                        <img src="{% static  'signup/images/signup-img1.jpg' %}" alt="">
+                    </div>
+                    <div class="signup-form" style="background-color:white;"                    >
+                        <form method="POST" class="register-form" id="register-form">
+                            {% csrf_token %} 
+                            <h2> registration in safakat</h2>
+                        
+
+
+                              {% for msg in messages %}
+
+                                <div class="alert alert-danger" role="alert">
+                                  {{msg}}
+                                </div>
+                              {% endfor %} 
+                                                                
+
+
+                            <div class="form-group">
+                              <label for="inputName">phone</label>
+                              <input type="tel" class="form-control" name="phone_number" id="inputName" placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="inputEmail">Email address</label>
+                              <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="inputPassword">Password</label>
+                              <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" name="confirm_password" class="form-control" id="inputPassword" placeholder="confirmPassword" required>
+                            </div>
+                            <center>
+                              <button type="submit" class="btn btn-primary" style="margin-top:15px;">Register</button>
+                               <h6>   if you have account?   <a href="{% url 'login' %}">login </a> </h6>
+                            </center>
+
+
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="inputEmail">Email address</label>
-                  <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword">Password</label>
-                  <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="confirm_password" class="form-control" id="inputPassword" placeholder="confirmPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:15px;">Sign up</button>
-              </form>
-          </div>
+            </div>
+    
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <!--- here old forms  -->
+
       </div>
     </div>
 
@@ -139,6 +202,10 @@
 
   <!-- Template Main JS File -->
   <script src="{% static  'assets/js/main.js' %}"></script>
+
+
+  <script src="{% static  'signup/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static  'signup/js/main.js' %}"></script>
 
 
 
