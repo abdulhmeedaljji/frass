@@ -60,14 +60,21 @@
           <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
-  	      {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
-	        {% endif %}
 
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -77,11 +84,10 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
-          
+
         </ul>
       </nav><!-- .navbar -->
 
@@ -94,7 +100,7 @@
           <div class="container text-center" style="padding-top:50px;">
             {% for t in tender_details %}
 
-              <h3> here Details</h3> 
+              <h3> here Details</h3>
                 <div class="card mb-6">
                   {% for obj in file_objs %}
                    <center>
@@ -107,12 +113,12 @@
 
                   <div class="card-body">
                     <h5 class="card-title">{{t.tittle}}</h5>
-                    
+
                     <div class="row">
                       <div class="col">
                         <p class="card-text" style="color:red;" ><i class="bi bi-send-x" style="color:black" ></i> end time : {{t.end_time}}</p>
                       </div>
-                      <div class="col">  
+                      <div class="col">
                         <p class="card-text" style="color:black;" >   <i class="bi bi-geo-alt"></i>  state : {{t.state}}</p>
                       </div>
                     </div>
@@ -124,15 +130,15 @@
                   </div>
                 </div>
             {% endfor %}
-    
-        </div>  
+
+        </div>
 
 
-    
-        
+
+
 
     </section>
- 
+
 
 
 
@@ -148,6 +154,17 @@
 
   <!-- Template Main JS File -->
   <script src="{% static  'assets/js/main.js' %}"></script>
+  <script>
+    // Get the language form and select elements
+    const languageForm = document.getElementById('language-form');
+    const languageSelect = document.getElementById('language-select');
+    
+    // Add an event listener to the select element
+    languageSelect.addEventListener('change', function() {
+        // Submit the form when the user changes the selection
+        languageForm.submit();
+    });
+</script>
 
 </body>
 

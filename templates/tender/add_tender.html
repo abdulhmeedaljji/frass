@@ -18,13 +18,13 @@
   <!-- Google Fonts -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" /> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
   <!-- Or for RTL support -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-  
 
-  
+
+
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,14 +72,21 @@
           <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
-  	      {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
-	        {% endif %}
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
 
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -89,7 +96,6 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
@@ -105,7 +111,7 @@
 
 
     <div class="container text-center " style="padding-top:50px;">
-      <h3> added tender</h3> 
+      <h3> added tender</h3>
 
 
       <center>
@@ -114,7 +120,7 @@
 
           <!-- 2 column grid layout with text inputs for the first and last names -->
           <div class="row mb-8">
-           
+
             <center>
               <div class="col-md-6">
                 <div class="form-outline">
@@ -123,10 +129,10 @@
                   <input type="text" id="form6Example1" name="tittle" class="form-control" required  />
                 </div>
               </div>
-            </center>  
+            </center>
 
 
-            
+
             <center>
               <div class="col-md-6">
                 <div class="form-outline">
@@ -135,10 +141,10 @@
                   <input type="text" id="form6Example1" name="tittlear" class="form-control" required  />
                 </div>
               </div>
-            </center> 
-        
+            </center>
+
           </div>
-        
+
           <!-- Text input -->
           <div class="col-md-6">
 
@@ -202,61 +208,73 @@
                 <option value="Djanet">Djanet</option>
                 <option value="Ain Salah">Ain Salah</option>
                 <option value="Ain Guezzam">Ain Guezzam</option>
-                
+
 
 
               </select>
             </div>
           </div>
           <!-- Text input -->
-
-          <div class="col-md-6"> 
-            <div class="form-outline mb-4">
-                <label class="form-label"  for="form6Example4">sector</label>
-
-                <select class="form-select " id="multiple-select-clear-field" name="sectors[]" onchange=""  data-placeholder="Choose the sector you want subscription" multiple  required >
-                  {% for c in Ch %} 
-
-                  <option value="{{c.id}}">{{c.name}}</option>
-
-                  {% endfor %}
-
-
-                  </select>
-
-
-
-        
-
-
-            </div>
-          </div>  
-
-
-        
-          <!-- Email input -->
-
-          <div class="col-md-6"> 
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form6Example5">start in </label>
-
-              <input type="date" class="form-control" name="startdate" id="my-date-input" name="my-date" required>        
           
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+                <label class="form-label"  for="form6Example4">city</label>
+                <input type="text" class="form-control" name="city" id="my-date-input" name="city" required>
             </div>
           </div>
 
-          <div class="col-md-6"> 
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+                <label class="form-label"  for="form6Example4">type</label>
+                <select class="form-select " id="multiple-select-clear-field" name="types[]"  data-placeholder="Choose the sector you want subscription" multiple  required >
+                  {% for t in types %}
+                     <option value="{{t.id}}">{{t.type_name}}</option>
+                  {% endfor %}
+                </select>  
+
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+                <label class="form-label"  for="form6Example4">sector</label>
+                <select class="form-select " id="multiple-select-clear-field" name="sectors[]" onchange=""  data-placeholder="Choose the sector you want subscription"   required >
+                  {% for c in Ch %}
+                  <option value="{{c.id}}">{{c.name}}</option>
+                  {% endfor %}
+                  </select>
+
+            </div>
+          </div>
+
+
+
+          <!-- Email input -->
+
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form6Example5">start in </label>
+
+              <input type="date" class="form-control" name="startdate" id="my-date-input" name="my-date" required>
+
+            </div>
+          </div>
+
+          <div class="col-md-6">
             <div class="form-outline mb-4">
               <label class="form-label" for="form6Example5">end in </label>
 
-              <input type="date" class="form-control" name="enddate" id="my-date-input" name="my-date" required>        
-          
+              <input type="date" class="form-control" name="enddate" id="my-date-input" name="my-date" required>
+
             </div>
-          </div>  
+          </div>
 
 
           <!-- Number input -->
-          <div class="col-md-6">  
+          <div class="col-md-6">
             <div class="form-outline mb-4">
               <label class="form-label" for="form6Example6">image </label>
 
@@ -266,23 +284,23 @@
 
 
           <!-- Message input -->
-    
-        
+
+
           <!-- Submit button -->
 
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary btn-block mb-4">add</button>
-          </div>   
+          </div>
         </form>
-      </center>  
- 
+      </center>
+
     </div>
 
 
-        
+
 
     </section>
- 
+
 
 
 
@@ -320,7 +338,7 @@
 </script>
 
 
-    
+
 <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
@@ -329,11 +347,21 @@
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
     }, 'google_translate_element');
   }
-</script> 
+</script>
 
 
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
-
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+  // Get the language form and select elements
+  const languageForm = document.getElementById('language-form');
+  const languageSelect = document.getElementById('language-select');
+  
+  // Add an event listener to the select element
+  languageSelect.addEventListener('change', function() {
+      // Submit the form when the user changes the selection
+      languageForm.submit();
+  });
+</script>
 
 
 </body>

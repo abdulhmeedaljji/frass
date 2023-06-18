@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,14 +61,21 @@
           <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
-  	      {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
-	        {% endif %}
 
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -77,7 +85,6 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
@@ -95,20 +102,20 @@
 
             <div class="container text-center" style="padding-top:50px;">
 
-               <h3> can not access this tender your subcscription   </h3> 
-                
+               <h3> can not access this tender your subcscription   </h3>
+
 
                <a href="{% url 'tender' %}" class="btn btn-primary">return all tender page</a>
 
-     
-          </div>  
+
+          </div>
 
 
-    
-        
+
+
 
     </section>
- 
+
 
 
 
@@ -124,6 +131,18 @@
 
   <!-- Template Main JS File -->
   <script src="{% static  'assets/js/main.js' %}"></script>
+
+  <script>
+    // Get the language form and select elements
+    const languageForm = document.getElementById('language-form');
+    const languageSelect = document.getElementById('language-select');
+    
+    // Add an event listener to the select element
+    languageSelect.addEventListener('change', function() {
+        // Submit the form when the user changes the selection
+        languageForm.submit();
+    });
+</script>
 
 </body>
 

@@ -51,7 +51,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="{% url 'Home' %}" class="logo d-flex align-items-center">
-    
+
         <h1>safakat <span>.</span></h1>
       </a>
 
@@ -64,7 +64,7 @@
           {% if request.user.is_superuser %}
               <li><a href="{% url 'dashboard' %}"> {% trans 'dashboard'   %} </a></li>
 
-          {% endif %}    
+          {% endif %}
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
           {% if request.user.is_superuser %}
@@ -74,7 +74,7 @@
           {% endif %}
 
           {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
 
             <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
 
@@ -86,9 +86,9 @@
 
           {% comment %} <div id="google_translate_element"> </div> {% endcomment %}
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -98,7 +98,6 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
@@ -110,11 +109,10 @@
 
   <!-- ======= Hero Section ======= -->
   {% for msg in messages %}
-
-  <div class="alert alert-success" role="alert">
-    {{msg}}
-  </div>
- {% endfor %} 
+    <div class="alert alert-success" role="alert">
+      {{msg}}
+    </div>
+  {% endfor %}
 
   <section id="hero" class="hero">
 
@@ -130,14 +128,14 @@
       </div>
       <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-2.jpg' %})">
           <div class="carousel-caption" style="margin-bottom:200px;">
-          
+
           <h1>  <strong> {% trans   'Welcome to' %}  </strong> safakat</h1>
           <p>{% trans 'This is best site for tender' %} </p>
           <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
         </div>
       </div>
       <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-3.jpg' %})">
-        <div class="carousel-caption" style="margin-bottom:200px;">  
+        <div class="carousel-caption" style="margin-bottom:200px;">
           <h1>  <strong>  {% trans   'Welcome to' %}</strong> safakat</h1>
           <p>{% trans 'This is best site for tender' %} </p>
           <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
@@ -152,41 +150,6 @@
     </div>
 
 
-
-
-
-
-    
-
-    {% comment %} <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-
-      <div class="carousel-item active" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-1.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-2.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url( {% static  'assets/img/hero-carousel/hero-carousel-3.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-4.jpg'  %}) "></div>
-      <div class="carousel-item" style="background-image: url({% static  'assets/img/hero-carousel/hero-carousel-5.jpg' %})"></div>
-
-      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
-    </div> {% endcomment %}
-{% comment %} 
-    <div class="info d-flex align-items-center">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <h2 data-aos="fade-down">Welcome to <span>Farass</span></h2>
-            <p data-aos="fade-up">Get tender announcements in all states of Algeria.</p>
-            <a data-aos="fade-up" data-aos-delay="200" href="{% url 'tender' %}" class="btn-get-started">Get Started</a>
-          </div>
-        </div>
-      </div>
-    </div> {% endcomment %}
 
   </section><!-- End Hero Section -->
 
@@ -215,7 +178,7 @@
                 </div>
               </div>
             </div>
-          </div><!-- End Card Item -->          
+          </div><!-- End Card Item -->
         </div>
       </div>
     </section><!-- End Constructions Section -->
@@ -230,14 +193,14 @@
         </div>
 
         <div class="row gy-4">
-        
+
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item position-relative">
               <div class="icon">
                 <i class="fa-solid fa-arrow-up-from-ground-water"></i>
               </div>
               <h3>{% trans ' get all tenders across the entire national'  %}</h3>
-           
+
             </div>
           </div><!-- End Service Item -->
 
@@ -246,7 +209,7 @@
               <div class="icon">
                 <i class="bi bi-activity"></i>
               </div>
-              <h3>{% trans 'Daily and reliable data across the entire states of Algeria' %}</h3>            
+              <h3>{% trans 'Daily and reliable data across the entire states of Algeria' %}</h3>
             </div>
           </div><!-- End Service Item -->
 
@@ -255,7 +218,7 @@
               <div class="icon">
                 <i class="bi bi-cart"></i>
               </div>
-              <h3>{% trans 'Competitive prices and convenient payment methods' %}</h3>          
+              <h3>{% trans 'Competitive prices and convenient payment methods' %}</h3>
             </div>
           </div><!-- End Service Item -->
         </div>
@@ -275,19 +238,19 @@
         <div class="slides-2 swiper">
           <div class="swiper-wrapper">
             {% for last in last_five_objects %}
-            
+
             <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">
                   <h2 class="text-center" >{{last.tittle}}</h3>
-                    <center>  
+                    <center>
                       <div class="stars">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                       </div>
                       <div class="row">
                         <div class="col">
                           <p>
-                            <i class="bi bi-geo-alt"></i> {{last.state}} 
+                            <i class="bi bi-geo-alt"></i> {{last.state}}
                           </p>
                         </div>
 
@@ -302,14 +265,14 @@
                     <center>
                       <a href="{% url 'tenderdetaile' id=last.id %}" class="btn btn-primary">Details</a>
 
-                    </center> 
+                    </center>
 
                 </div>
               </div>
             </div><!-- End testimonial item -->
 
 
-            {% endfor %} 
+            {% endfor %}
 
             </div><!-- End testimonial item -->
 
@@ -321,7 +284,7 @@
       </div>
     </section><!-- End Testimonials Section -->
 
-     
+
   <section id="recent-blog-posts" class="recent-blog-posts" style="background-color:#f7f9f8;">
 
     {% if subscription %}
@@ -330,7 +293,7 @@
 
 
    <div class="container">
-    
+
 
       <div class=" section-header" >
 
@@ -354,76 +317,13 @@
             </div>
           </div>
         </div>
-{% comment %} 
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">plan 1</h5>
 
-              <p class="card-text  text-center">1,900 DZD including TAX.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">up to 3 categories</li>
-              <li class="list-group-item text-center">can select the categories </li>
-            </ul>
-            <div class="card-footer">
-              <center>   <a href="{% url 'BasicSubscriptionView' 'plan1' %}" class="btn btn-primary">Register</a> </center>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">plan 2</h5>
-              <p class="card-text  text-center">1,900 DZD including TAX.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">up to 5 categories</li>
-              <li class="list-group-item text-center">can select the categories </li>
-            </ul>
-            <div class="card-footer">
-              <center>   <a href="{% url 'BasicSubscriptionView' 'plan2'  %}" class="btn btn-primary">Register</a> </center>
-            </div>
-          </div> 
-        </div>
-{% comment %} 
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">plan 3</h5>
-              <p class="card-text  text-center">1,900 DZD including TAX.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">up to 10 categories</li>
-              <li class="list-group-item text-center">can select the categories </li>
-            </ul>
-            <div class="card-footer">
-              <center>   <a href="{% url 'BasicSubscriptionView' 'plan3'  %}" class="btn btn-primary">Register</a> </center>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-center">plan 4</h5>
-              <p class="card-text  text-center">1,900 DZD including TAX.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-center">all categories</li>
-            </ul>
-
-            <div class="card-footer">
-             <center>   <a href="{% url 'BasicSubscriptionView' 'plan4' %}" class="btn btn-primary">Register</a> </center>
-            </div>
-          </div>
-        </div> {% endcomment %}
 
       </div>
 
-    
+
       </div>
-     {% endif %} 
+     {% endif %}
     </section>
     <!-- End Recent Blog Posts Section -->
 
@@ -438,7 +338,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="footer-info">
-              <h3>Frass</h3>
+              <h3>safakat</h3>
               <p>
                  <br>
                  Algeria<br><br>
@@ -460,19 +360,19 @@
               <li><a href="#">Home</a></li>
               <li><a href="#About">About us</a></li>
               <li><a href="#Service">Services</a></li>
-           
+
             </ul>
           </div><!-- End footer links column-->
 
-   
-    
+
+
           <div class="col-lg-4 col-md-8 footer-links">
             <h4>Service</h4>
             <ul>
               <li><a href="#">Payment easily </a></li>
               <li><a href="#About">All tenders in Algeria</a></li>
               <li><a href="#Service">Best prcice </a></li>
-           
+
             </ul>
           </div><!-- End footer links column-->
 
@@ -483,7 +383,7 @@
     <div class="footer-legal text-center position-relative">
       <div class="container">
         <div class="copyright">
-          &copy; Copyright <strong><span>Frass</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>safakat</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
                   Designed by <a href="">Abdulhmmed Aljji</a>
@@ -518,15 +418,27 @@
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
       }, 'google_translate_element');
     }
-  </script> 
-  
-  
+  </script>
+
+  <script>
+    // Get the language form and select elements
+    const languageForm = document.getElementById('language-form');
+    const languageSelect = document.getElementById('language-select');
+    
+    // Add an event listener to the select element
+    languageSelect.addEventListener('change', function() {
+        // Submit the form when the user changes the selection
+        languageForm.submit();
+    });
+</script>
+
+
 
 
   <!-- Add the Google Translate API script -->
 
-  
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 

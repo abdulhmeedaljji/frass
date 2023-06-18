@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser,File,ArchiveFile,Archivetender ,Choice ,Subscription,tender
+from .models import CustomUser,File,ArchiveFile,Archivetender ,Choice ,Subscription,tender,Type_tender
 # Register your models here.
 
 
@@ -11,6 +11,7 @@ admin.site.register(File)
 admin.site.register(ArchiveFile)
 admin.site.register(Archivetender)
 
+admin.site.register(Type_tender)
 
 
 

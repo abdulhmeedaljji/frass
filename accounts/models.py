@@ -57,6 +57,40 @@ class Subscription(models.Model):
     def __str__(self):
         return f"{self.user}    "
     
+  
+  
+tender_type_choices = (    
+    ('Limited national tenders', 'Limited national tenders'),
+    ('Open national tenders', 'Open national tenders'),
+    ('limited international tenders', 'limited international tenders'),
+    ('Open international tenders', 'Open international tenders'),
+    ('Limited international consulting', 'Limited international consulting'),
+    ('Open international consultation', 'Open international consultation'),   
+    ('Open national competition', 'Open national competition'),
+    ('Limited National Competition', 'Limited National Competition'),
+    ('Notice of qualification', 'Notice of qualification'),
+    ('Limited advance national notice', 'LLimited advance national notice'),
+    ('Advance national notice', 'Advance national notice'),
+    ('Limited advance national and international notice', 'Limited advance national and international notice'),
+    ('Extending the deadlines for the limited national tender', 'Extending the deadlines for the limited national tender'),   
+    ('Extending the deadlines for the national open tender', 'Extending the deadlines for the national open tender'),
+    ('Extending the deadlines for the limited international tender', 'Extending the deadlines for the limited international tender'),
+    ('Extension of deadlines for open international tender', 'Extension of deadlines for open international tender'),
+    ('Extending the deadlines for the limited national and international tender', 'Extending the deadlines for the limited national and international tender'),  
+    ('Extending the deadlines for the national and international open tender', 'Extending the deadlines for the national and international open tender'),
+    ('Express interest', 'Express interest'),
+    
+     
+) 
+  
+class Type_tender(models.Model):
+    type_name=models.CharField(max_length=150, blank=True, null=True,choices=tender_type_choices)
+
+    def __str__(self):
+        return self.type_name
+    
+      
+  
     
     
     
@@ -66,6 +100,10 @@ class tender(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_time=models.DateField()
     state=models.CharField(max_length=150)
+    
+    city=models.CharField(max_length=150,blank=True, null=True)
+    type_Name=models.ManyToManyField(Type_tender)
+    
     sectoer = models.ManyToManyField(Choice)
     activity=models.BooleanField(default=False)
     

@@ -60,14 +60,22 @@
           <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
-  	      {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
-	        {% endif %}
+
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
 
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -77,7 +85,6 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
@@ -92,23 +99,23 @@
     <section id="" class="">
 
 
-      
 
-    
+
+
 
 
 
          <div class="container text-center" style="padding-top:50px;">
-            <h3>  Details</h3> 
+            <h3>  Details</h3>
               <div class="card mb-12">
                   <center>
-                  {% comment %}                     
+                  {% comment %}
                   <h5> to get the Details  need Subscription in our plan    </h5>
-                   <a href="{% url 'BasicSubscriptionView' 'Basic' %}"> <strong>  Subscription from here </stronge>  </a> 
-                  <form  action="{% url 'BasicSubscriptionView' 'Basic' %}">  
+                   <a href="{% url 'BasicSubscriptionView' 'Basic' %}"> <strong>  Subscription from here </stronge>  </a>
+                  <form  action="{% url 'BasicSubscriptionView' 'Basic' %}">
                     {% csrf_token %}
                      <button type="submit" class="btn btn-warning btn-rounded  btn-lg">Subscription from here</button>
-                  </form> 
+                  </form>
                   {% endcomment %}
 
 
@@ -118,41 +125,41 @@
                 <center>
                   <img src="{% static 'assets\img\lock_pic.jpg' %}"  style="width:300px;">
 
-                </center>  
+                </center>
 
                 <div class="card-body">
                   <h5 class="card-title"> tittle: onlly for subscribers</h5>
-                  
+
                   <div class="row">
                     <div class="col-6">
                       <p class="card-text" style="color:red;" ><i class="bi bi-send-x" style="color:black" ></i> end time : onlly for subscribers</p>
                     </div>
-                    <div class="col-6">  
+                    <div class="col-6">
                       <p class="card-text" style="color:black;" >   <i class="bi bi-geo-alt"></i>  state : onlly for subscribers </p>
                     </div>
-                  
+
 
                     <p class="card-text" style="color:black;" > scectoer : onlly for subscribers</p>
 
 
                 </div>
-                
-                <form  action="{% url 'BasicSubscriptionView' 'Basic' %}">  
+
+                <form  action="{% url 'BasicSubscriptionView' 'Basic' %}">
                   {% csrf_token %}
                   to get information about tender  <button type="submit" class="btn btn-warning btn-rounded  btn-lg">Subscription from here</button>
                 </form>
               </div>
 
-              
-    
-      </div>  
 
 
-    
-        
+      </div>
+
+
+
+
 
     </section>
- 
+
 
 
 

@@ -6,11 +6,16 @@ from .models import CustomUser,tender,Choice,ArchiveFile,Archivetender
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from datetime import date, timedelta
-from .models import Subscription,tender,File,SECTOER_CHOICES
+from .models import Subscription,tender,File,SECTOER_CHOICES,Type_tender
 from .decorators import cheak_user_subscription,cheak_tender_subscription
 from django.db.models import Q
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.paginator import (
+    Paginator,
+    EmptyPage,
+    PageNotAnInteger,
+)
 
 
 
@@ -284,20 +289,26 @@ def added_tender(request):
     if request.method=="POST":
        tillle=request.POST.get('tittle')
        tillle_ar=request.POST.get('tittlear')
+       
+       city=request.POST.get('city')
 
        state=request.POST.get('state')
 
        sectors=request.POST.getlist('sectors[]')
+       type_tender=request.POST.getlist('types[]')
+
+       
+       
        startdate=request.POST.get('startdate')
        enddate=request.POST.get('enddate')
-       files = request.FILES.getlist('img')       
+       files = request.FILES.getlist('img') 
+             
        added=tender.objects.create(tittle=tillle,
                                    tittle_ar=tillle_ar,
                                    state=state,
                                    start_date=startdate,           
                                    end_time=enddate,
-                                   
-                                   
+                                   city=city,                                                                                                         
                                    )
                     
        
@@ -306,6 +317,10 @@ def added_tender(request):
          
          
       
+       for t in type_tender:
+         added.type_Name.add(t)
+         
+         
          
        for file in files:
             new_file = File.objects.create(
@@ -321,7 +336,11 @@ def added_tender(request):
        
     else:
      Ch=Choice.objects.all()
-     return render(request,"tender/add_tender.html",{'Ch':Ch})
+     types = Type_tender.objects.all()
+     print("asdads")
+     print(types)
+     
+     return render(request,"tender/add_tender.html",{'Ch':Ch,"types":types})
 
 
 
@@ -338,11 +357,25 @@ from datetime import datetime
 
 def tenders_main(request):
     if request.method == "POST":
+        default_page = 1
+        page = request.GET.get('page', default_page)
+        
+        items_per_page = 5
+        
+        
         Ch=Choice.objects.all()
+        types = Type_tender.objects.all()
 
         tittle=request.POST.get('tittle')
         state=request.POST.get('state')
         sectors=request.POST.get('sectors')        
+        types_tender=request.POST.get('types')    
+        
+        
+        
+        print("typessssssssssssss")
+        print(types_tender)    
+
         date_range_str = request.POST.get('datefilter')
         
         if date_range_str =="":
@@ -364,6 +397,11 @@ def tenders_main(request):
             if not sectors=="":    
              q= Q(sectoer=sectors )
              tenders = tender.objects.filter(q)
+             
+             
+            if not types_tender=="":    
+                 q= Q(type_Name=types_tender )
+                 tenders = tender.objects.filter(q)
 
             if not tittle=="":
                 q=Q(tittle__icontains=tittle ) 
@@ -377,13 +415,24 @@ def tenders_main(request):
                 q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
                 tenders = tender.objects.filter(q)          
     
-                
-            return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
+            types = Type_tender.objects.all()
+            
+            paginator = Paginator(tenders, items_per_page)
+            
+            try:
+                tenders = paginator.page(page)
+            except PageNotAnInteger:
+                tenders = paginator.page(default_page)
+            except EmptyPage:
+                tenders = paginator.page(paginator.num_pages)
+    
+            return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch,"types":types})
         
         
         
         
         tenders = tender.objects.all().order_by('-start_date')
+        types = Type_tender.objects.all()
 
         if not sectors=="":    
             q= Q(sectoer=sectors )
@@ -401,22 +450,66 @@ def tenders_main(request):
             q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
             tenders = tender.objects.filter(q,user_id=request.user.id).values_list('plan', flat=True)          
 
+
+            paginator = Paginator(tenders, items_per_page)
+            
+            try:
+                tenders = paginator.page(page)
+            except PageNotAnInteger:
+                tenders = paginator.page(default_page)
+            except EmptyPage:
+                tenders = paginator.page(paginator.num_pages)
     
-        return render(request,"tender/tender.html",{'tenders':tenders ,  "Ch":Ch})
+    
+        return render(request,"tender/tender.html",{'tenders':tenders ,  "Ch":Ch,"types":types})
     else:
+        default_page = 1
+        page = request.GET.get('page', default_page)
+        
+        items_per_page = 5
+        
+        types = Type_tender.objects.all()
+ 
         user_have_sub=Subscription.objects.filter(user_id=request.user.id).exists()
         if  user_have_sub:
             categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
             Ch=Choice.objects.all()
             tenders = tender.objects.filter(sectoer__id__in=categres).order_by('-start_date')
             
+            paginator = Paginator(tenders, items_per_page)
+            
+            try:
+                tenders = paginator.page(page)
+            except PageNotAnInteger:
+                tenders = paginator.page(default_page)
+            except EmptyPage:
+                tenders = paginator.page(paginator.num_pages)
+
             if len(tenders)== 0:
                 tenders = tender.objects.all().order_by('-start_date')
-            return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
+                paginator = Paginator(tenders, items_per_page)
+            
+            try:
+                tenders = paginator.page(page)
+            except PageNotAnInteger:
+                tenders = paginator.page(default_page)
+            except EmptyPage:
+                tenders = paginator.page(paginator.num_pages)
+            return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch,"types":types})
            
     tenders=tender.objects.all().order_by('-start_date')
     Ch=Choice.objects.all()
-    return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch})
+    types = Type_tender.objects.all()
+    paginator = Paginator(tenders, items_per_page)
+    
+    try:
+        tenders = paginator.page(page)
+    except PageNotAnInteger:
+        tenders = paginator.page(default_page)
+    except EmptyPage:
+        tenders = paginator.page(paginator.num_pages)
+
+    return render(request,"tender/tender.html",{'tenders':tenders , "Ch":Ch,"types":types})
 
 
 
@@ -431,6 +524,10 @@ def tenders_archive_main(request):
         sectors=request.POST.get('sectors')        
         date_range_str = request.POST.get('datefilter')
         
+        default_page = 1
+        page = request.GET.get('page', default_page)        
+        items_per_page = 5
+    
         if date_range_str =="":
             start_date =""
             end_date = ""
@@ -463,8 +560,18 @@ def tenders_archive_main(request):
                 q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
                 tenders = Archivetender.objects.filter(q)          
     
-                
-            return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
+            types = Type_tender.objects.all()
+            paginator = Paginator(tenders, items_per_page)
+            
+            try:
+                tenders = paginator.page(page)
+            except PageNotAnInteger:
+                tenders = paginator.page(default_page)
+            except EmptyPage:
+                tenders = paginator.page(paginator.num_pages)
+    
+     
+            return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch , "type":types})
         
         
         
@@ -487,9 +594,23 @@ def tenders_archive_main(request):
             q=Q(start_date__range=(start_date, end_date)) | Q(end_time__range=(start_date, end_date))
             tenders = Archivetender.objects.filter(q,user_id=request.user.id).values_list('plan', flat=True)          
 
-    
-        return render(request,"tender/archivetender.html",{'tenders':tenders ,  "Ch":Ch})
+        types = Type_tender.objects.all()
+        paginator = Paginator(tenders, items_per_page)
+        
+        try:
+            tenders = paginator.page(page)
+        except PageNotAnInteger:
+            tenders = paginator.page(default_page)
+        except EmptyPage:
+            tenders = paginator.page(paginator.num_pages)
+
+
+        return render(request,"tender/archivetender.html",{'tenders':tenders ,  "Ch":Ch , "types":types })
     else:
+        
+        default_page = 1
+        page = request.GET.get('page', default_page)        
+        items_per_page = 5
         user_have_sub=Subscription.objects.filter(user_id=request.user.id).exists()
         if  user_have_sub:
             categres=Subscription.objects.filter(user_id=request.user.id).values_list('plan', flat=True)
@@ -498,10 +619,31 @@ def tenders_archive_main(request):
             
             if len(tenders)== 0:
                 tenders = Archivetender.objects.all().order_by('-start_date')
-            return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
+                types = Type_tender.objects.all()
+                
+                paginator = Paginator(tenders, items_per_page)
+                
+                try:
+                    tenders = paginator.page(page)
+                except PageNotAnInteger:
+                    tenders = paginator.page(default_page)
+                except EmptyPage:
+                    tenders = paginator.page(paginator.num_pages)     
+
+                return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch , "types":types})
            
     tenders=Archivetender.objects.all().order_by('-start_date')
     Ch=Choice.objects.all()
+    
+    paginator = Paginator(tenders, items_per_page)
+    
+    try:
+        tenders = paginator.page(page)
+    except PageNotAnInteger:
+        tenders = paginator.page(default_page)
+    except EmptyPage:
+        tenders = paginator.page(paginator.num_pages)
+
     return render(request,"tender/archivetender.html",{'tenders':tenders , "Ch":Ch})
 
 

@@ -70,9 +70,21 @@
           <li><a href="{% url 'Home' %}" class="active">{% trans  'Home' %} </a></li>
           <li><a href="{% url 'tender' %}">{% trans 'Tenders' %}</a></li>
 
-  	      {% if user.is_authenticated %}
-            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> {{request.user.username}} </a></li>
-	        {% endif %}
+
+          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto" href="{% url 'userprofile' %}"> my account </a></li>
+
+            <li><a href="{% url 'logout' %}"> {% trans 'Logout' %}  </a></li>
+
+            {% else %}
+            <li><a href="{% url 'signup' %}">{% trans  'Register' %}</a></li>
+            <li><a href="{% url 'login' %}"> {% trans 'Login' %}  </a></li>
+
+          {% endif %}
+
+
+
+
 
           <li>
             {% comment %} <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
@@ -92,7 +104,7 @@
 
           </li>
 
- 
+
         </ul>
       </nav><!-- .navbar -->
 
@@ -103,7 +115,7 @@
 
   <section id="hero" class="hero">
 
-            
+
 
 
 
@@ -115,9 +127,9 @@
                     </div>
                     <div class="signup-form" style="background-color:white;"                    >
                         <form method="POST" class="register-form" id="register-form">
-                            {% csrf_token %} 
+                            {% csrf_token %}
                             <h2> registration in safakat</h2>
-                        
+
 
 
                               {% for msg in messages %}
@@ -125,8 +137,8 @@
                                 <div class="alert alert-danger" role="alert">
                                   {{msg}}
                                 </div>
-                              {% endfor %} 
-                                                                
+                              {% endfor %}
+
 
 
                             <div class="form-group">
@@ -141,7 +153,7 @@
                               <label for="inputPassword">Password</label>
                               <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
                             </div>
-            
+
                             <div class="form-group">
                                 <label for="inputPassword">Password</label>
                                 <input type="password" name="confirm_password" class="form-control" id="inputPassword" placeholder="confirmPassword" required>
@@ -156,7 +168,7 @@
                     </div>
                 </div>
             </div>
-    
+
         </div>
 
 
@@ -177,14 +189,14 @@
       </div>
     </div>
 
- 
+
 
   </section><!-- End Hero Section -->
 
 
 
   <!-- ======= Footer ======= -->
- 
+
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -209,7 +221,7 @@
 
 
 
-  
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -218,15 +230,28 @@
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Horizontal dropdown layout
       }, 'google_translate_element');
     }
-  </script> 
-  
-  
+  </script>
+
+
+  <script>
+    // Get the language form and select elements
+    const languageForm = document.getElementById('language-form');
+    const languageSelect = document.getElementById('language-select');
+    
+    // Add an event listener to the select element
+    languageSelect.addEventListener('change', function() {
+        // Submit the form when the user changes the selection
+        languageForm.submit();
+    });
+  </script>
+
+
 
 
   <!-- Add the Google Translate API script -->
 
-  
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 

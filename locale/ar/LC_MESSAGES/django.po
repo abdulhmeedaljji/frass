@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 20:23+0300\n"
+"POT-Creation-Date: 2023-06-14 14:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,292 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\templates\index.html:62 .\templates\tender\tender.html:60
+#: .\templates\dasboard\dashboard.html:693
+#: .\templates\tender\archivetender.html:149 .\templates\tender\tender.html:149
+msgid "Adrar"
+msgstr " أدرار"
+
+#: .\templates\dasboard\dashboard.html:694
+#: .\templates\tender\archivetender.html:150 .\templates\tender\tender.html:150
+msgid "Chlef"
+msgstr " الشلف"
+
+#: .\templates\dasboard\dashboard.html:695
+#: .\templates\tender\archivetender.html:151 .\templates\tender\tender.html:151
+msgid "Laghouat"
+msgstr " الأغواط"
+
+#: .\templates\dasboard\dashboard.html:696
+#: .\templates\tender\archivetender.html:152 .\templates\tender\tender.html:152
+msgid "Oum El Bouaghi"
+msgstr " أم البواقي"
+
+#: .\templates\dasboard\dashboard.html:697
+#: .\templates\tender\archivetender.html:153 .\templates\tender\tender.html:153
+msgid "Batna"
+msgstr " باتنة"
+
+#: .\templates\dasboard\dashboard.html:698
+#: .\templates\tender\archivetender.html:154 .\templates\tender\tender.html:154
+msgid "Béjaïa"
+msgstr " بجاية"
+
+#: .\templates\dasboard\dashboard.html:699
+#: .\templates\tender\archivetender.html:155 .\templates\tender\tender.html:155
+msgid "Biskra"
+msgstr " بسكرة"
+
+#: .\templates\dasboard\dashboard.html:700
+#: .\templates\tender\archivetender.html:156 .\templates\tender\tender.html:156
+msgid "Béchar"
+msgstr " بشار"
+
+#: .\templates\dasboard\dashboard.html:701
+#: .\templates\tender\archivetender.html:157 .\templates\tender\tender.html:157
+msgid "Blida"
+msgstr " البليدة"
+
+#: .\templates\dasboard\dashboard.html:702
+#: .\templates\tender\archivetender.html:158 .\templates\tender\tender.html:158
+msgid "Bouïra"
+msgstr " البويرة"
+
+#: .\templates\dasboard\dashboard.html:703
+#: .\templates\tender\archivetender.html:159 .\templates\tender\tender.html:159
+msgid "Tamanrasset"
+msgstr " تمنراست"
+
+#: .\templates\dasboard\dashboard.html:704
+#: .\templates\tender\archivetender.html:160 .\templates\tender\tender.html:160
+msgid "Tébessa"
+msgstr " تبسة"
+
+#: .\templates\dasboard\dashboard.html:705
+#: .\templates\dasboard\dashboard.html:707
+#: .\templates\dasboard\dashboard.html:709
+#: .\templates\tender\archivetender.html:161 .\templates\tender\tender.html:161
+msgid "Tlemcen"
+msgstr " تلمسان"
+
+#: .\templates\dasboard\dashboard.html:706
+#: .\templates\tender\archivetender.html:162 .\templates\tender\tender.html:162
+msgid "Tiaret"
+msgstr " تيارت"
+
+#: .\templates\dasboard\dashboard.html:708
+#: .\templates\tender\archivetender.html:163 .\templates\tender\tender.html:163
+msgid "Tizi Ouzou"
+msgstr " تيزي وزو"
+
+#: .\templates\dasboard\dashboard.html:710
+#: .\templates\tender\archivetender.html:164 .\templates\tender\tender.html:164
+msgid "Algiers"
+msgstr " الجزائر"
+
+#: .\templates\dasboard\dashboard.html:711
+msgid "Jijel"
+msgstr "\t جيجل "
+
+#: .\templates\dasboard\dashboard.html:712
+#: .\templates\tender\archivetender.html:166 .\templates\tender\tender.html:166
+msgid "Sétif"
+msgstr " سطيف"
+
+#: .\templates\dasboard\dashboard.html:713
+#: .\templates\tender\archivetender.html:167 .\templates\tender\tender.html:167
+msgid "Saïda"
+msgstr " سعيدة"
+
+#: .\templates\dasboard\dashboard.html:714
+#: .\templates\tender\archivetender.html:168 .\templates\tender\tender.html:168
+msgid "Skikda"
+msgstr "\t سكيكدة"
+
+#: .\templates\dasboard\dashboard.html:715
+#: .\templates\tender\archivetender.html:169 .\templates\tender\tender.html:169
+msgid "Sidi Bel Abbès"
+msgstr " سيدي بلعباس"
+
+#: .\templates\dasboard\dashboard.html:716
+#: .\templates\tender\archivetender.html:170 .\templates\tender\tender.html:170
+msgid "Annaba"
+msgstr "\t عنابة"
+
+#: .\templates\dasboard\dashboard.html:717
+#: .\templates\tender\archivetender.html:171 .\templates\tender\tender.html:171
+msgid "Guelma"
+msgstr "\t قالمة"
+
+#: .\templates\dasboard\dashboard.html:718
+#: .\templates\tender\archivetender.html:172 .\templates\tender\tender.html:172
+msgid "Constantine"
+msgstr "قسنطينة"
+
+#: .\templates\dasboard\dashboard.html:719
+#: .\templates\tender\archivetender.html:173 .\templates\tender\tender.html:173
+msgid "Médéa"
+msgstr " المدية"
+
+#: .\templates\dasboard\dashboard.html:720
+#: .\templates\tender\archivetender.html:174 .\templates\tender\tender.html:174
+msgid "Mostaganem"
+msgstr " مستغانم"
+
+#: .\templates\dasboard\dashboard.html:721
+#: .\templates\tender\archivetender.html:175 .\templates\tender\tender.html:175
+msgid "M'Sila"
+msgstr "\tوالمسيلة"
+
+#: .\templates\dasboard\dashboard.html:722
+#: .\templates\tender\archivetender.html:176 .\templates\tender\tender.html:176
+msgid "Mascara"
+msgstr " معسكر"
+
+#: .\templates\dasboard\dashboard.html:723
+#: .\templates\tender\archivetender.html:177 .\templates\tender\tender.html:177
+msgid "Ouargla"
+msgstr "\t ورقلة"
+
+#: .\templates\dasboard\dashboard.html:724
+#: .\templates\tender\archivetender.html:178 .\templates\tender\tender.html:178
+msgid "Oran"
+msgstr " وهران"
+
+#: .\templates\dasboard\dashboard.html:725
+#: .\templates\tender\archivetender.html:179 .\templates\tender\tender.html:179
+msgid "El Bayadh"
+msgstr " البيض"
+
+#: .\templates\dasboard\dashboard.html:726
+#: .\templates\tender\archivetender.html:180 .\templates\tender\tender.html:180
+msgid "Illizi"
+msgstr " إليزي"
+
+#: .\templates\dasboard\dashboard.html:727
+#: .\templates\tender\archivetender.html:181 .\templates\tender\tender.html:181
+msgid "Bordj Bou Arréridj"
+msgstr " برج بوعريريج"
+
+#: .\templates\dasboard\dashboard.html:728
+#: .\templates\tender\archivetender.html:182 .\templates\tender\tender.html:182
+msgid "Boumerdès"
+msgstr " بومرداس"
+
+#: .\templates\dasboard\dashboard.html:729
+#: .\templates\tender\archivetender.html:183 .\templates\tender\tender.html:183
+msgid "El Tarf"
+msgstr " الطارف"
+
+#: .\templates\dasboard\dashboard.html:730
+#: .\templates\tender\archivetender.html:184 .\templates\tender\tender.html:184
+msgid "Tindouf"
+msgstr " تندوف"
+
+#: .\templates\dasboard\dashboard.html:731
+#: .\templates\tender\archivetender.html:185 .\templates\tender\tender.html:185
+msgid "Tissemsilt"
+msgstr " تيسمسيلت"
+
+#: .\templates\dasboard\dashboard.html:732
+#: .\templates\tender\archivetender.html:186 .\templates\tender\tender.html:186
+msgid "El Oued"
+msgstr " الوادي"
+
+#: .\templates\dasboard\dashboard.html:733
+#: .\templates\tender\archivetender.html:187 .\templates\tender\tender.html:187
+msgid "Khenchela"
+msgstr " خنشلة"
+
+#: .\templates\dasboard\dashboard.html:734
+#: .\templates\tender\archivetender.html:188 .\templates\tender\tender.html:188
+msgid "Souk Ahras"
+msgstr " سوق أهراس"
+
+#: .\templates\dasboard\dashboard.html:735
+#: .\templates\tender\archivetender.html:189 .\templates\tender\tender.html:189
+msgid "Tipaza"
+msgstr " تيبازة"
+
+#: .\templates\dasboard\dashboard.html:736
+#: .\templates\tender\archivetender.html:190 .\templates\tender\tender.html:190
+msgid "Mila"
+msgstr " ميلة"
+
+#: .\templates\dasboard\dashboard.html:737
+#: .\templates\tender\archivetender.html:191 .\templates\tender\tender.html:191
+msgid "Aïn Defla"
+msgstr " عين الدفلى"
+
+#: .\templates\dasboard\dashboard.html:738
+#: .\templates\tender\archivetender.html:192 .\templates\tender\tender.html:192
+msgid "Naâma"
+msgstr " النعامة"
+
+#: .\templates\dasboard\dashboard.html:739
+#: .\templates\tender\archivetender.html:193 .\templates\tender\tender.html:193
+msgid "Aïn Témouchent"
+msgstr " عين تموشنت"
+
+#: .\templates\dasboard\dashboard.html:740
+#: .\templates\tender\archivetender.html:194
+#: .\templates\tender\archivetender.html:196 .\templates\tender\tender.html:194
+#: .\templates\tender\tender.html:196
+msgid "El M'Ghair"
+msgstr " غرداية"
+
+#: .\templates\dasboard\dashboard.html:741
+#: .\templates\tender\archivetender.html:195 .\templates\tender\tender.html:195
+msgid "Relizane"
+msgstr "غليزان"
+
+#: .\templates\dasboard\dashboard.html:742
+msgid "El M \"Ghair"
+msgstr " المغير"
+
+#: .\templates\dasboard\dashboard.html:743
+#: .\templates\tender\archivetender.html:197 .\templates\tender\tender.html:197
+msgid "Ouled Djellal"
+msgstr " أولاد جلال"
+
+#: .\templates\dasboard\dashboard.html:744
+#: .\templates\tender\archivetender.html:198 .\templates\tender\tender.html:198
+msgid "Bordj Baji Mokhtar"
+msgstr "\t برج باجي مختار"
+
+#: .\templates\dasboard\dashboard.html:745
+msgid "Béni Abbès"
+msgstr " بني عباس"
+
+#: .\templates\dasboard\dashboard.html:746
+#: .\templates\tender\archivetender.html:200 .\templates\tender\tender.html:200
+msgid "Touggourt"
+msgstr " تقرت"
+
+#: .\templates\dasboard\dashboard.html:747
+#: .\templates\tender\archivetender.html:201 .\templates\tender\tender.html:201
+msgid "Djanet"
+msgstr " جانت"
+
+#: .\templates\dasboard\dashboard.html:748
+#: .\templates\tender\archivetender.html:202 .\templates\tender\tender.html:202
+msgid "Ain Salah"
+msgstr "عين صلاح"
+
+#: .\templates\dasboard\dashboard.html:749
+#: .\templates\tender\archivetender.html:203 .\templates\tender\tender.html:203
+msgid "Ain Guezzam"
+msgstr "أين جزم"
+
+#: .\templates\index.html:62 .\templates\login.html:70
+#: .\templates\rest_passwords\change_password.html:60
+#: .\templates\rest_passwords\reset_password.html:60 .\templates\signup.html:70
+#: .\templates\subscription\Basci.html:69 .\templates\tender\add_tender.html:72
+#: .\templates\tender\archivetender.html:105
+#: .\templates\tender\archivetender_details.html:60
+#: .\templates\tender\can_not_access.html:61 .\templates\tender\tender.html:105
+#: .\templates\tender\tender_detail.html:61
+#: .\templates\tender\tender_prvent_nosuburbtion.html:60
+#: .\templates\tender\updatesubraption.html:65 .\templates\userprofile.html:79
 msgid "Home"
 msgstr "الرئسية"
 
@@ -27,7 +312,16 @@ msgstr "الرئسية"
 msgid "dashboard"
 msgstr "لوحة التحكم"
 
-#: .\templates\index.html:68
+#: .\templates\index.html:68 .\templates\login.html:71
+#: .\templates\rest_passwords\change_password.html:61
+#: .\templates\rest_passwords\reset_password.html:61 .\templates\signup.html:71
+#: .\templates\subscription\Basci.html:70 .\templates\tender\add_tender.html:73
+#: .\templates\tender\archivetender.html:106
+#: .\templates\tender\archivetender_details.html:61
+#: .\templates\tender\can_not_access.html:62 .\templates\tender\tender.html:106
+#: .\templates\tender\tender_detail.html:62
+#: .\templates\tender\tender_prvent_nosuburbtion.html:61
+#: .\templates\tender\updatesubraption.html:66 .\templates\userprofile.html:80
 msgid "Tenders"
 msgstr "المناقصات"
 
@@ -35,37 +329,61 @@ msgstr "المناقصات"
 msgid "add tender"
 msgstr "اضف مناقصة"
 
-#: .\templates\index.html:79
+#: .\templates\index.html:79 .\templates\login.html:78
+#: .\templates\rest_passwords\change_password.html:68
+#: .\templates\rest_passwords\reset_password.html:66 .\templates\signup.html:77
+#: .\templates\subscription\Basci.html:76 .\templates\tender\add_tender.html:78
+#: .\templates\tender\archivetender_details.html:67
+#: .\templates\tender\can_not_access.html:68
+#: .\templates\tender\tender_detail.html:67
+#: .\templates\tender\tender_prvent_nosuburbtion.html:67
+#: .\templates\tender\updatesubraption.html:73
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\templates\index.html:82 .\templates\index.html:356
+#: .\templates\index.html:82 .\templates\index.html:317
+#: .\templates\login.html:81 .\templates\rest_passwords\change_password.html:71
+#: .\templates\rest_passwords\reset_password.html:69 .\templates\signup.html:80
+#: .\templates\subscription\Basci.html:79 .\templates\tender\add_tender.html:81
+#: .\templates\tender\archivetender_details.html:70
+#: .\templates\tender\can_not_access.html:71
+#: .\templates\tender\tender_detail.html:70
+#: .\templates\tender\tender_prvent_nosuburbtion.html:70
+#: .\templates\tender\updatesubraption.html:76
 msgid "Register"
 msgstr "تسجيل الدخول"
 
-#: .\templates\index.html:83
+#: .\templates\index.html:83 .\templates\login.html:82
+#: .\templates\rest_passwords\change_password.html:72
+#: .\templates\rest_passwords\reset_password.html:70 .\templates\signup.html:81
+#: .\templates\subscription\Basci.html:80 .\templates\tender\add_tender.html:82
+#: .\templates\tender\archivetender_details.html:71
+#: .\templates\tender\can_not_access.html:72
+#: .\templates\tender\tender_detail.html:71
+#: .\templates\tender\tender_prvent_nosuburbtion.html:71
+#: .\templates\tender\updatesubraption.html:77
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: .\templates\index.html:126 .\templates\index.html:135
-#: .\templates\index.html:142
+#: .\templates\index.html:124 .\templates\index.html:133
+#: .\templates\index.html:140
 msgid "Welcome to"
 msgstr "مرحبا بك في "
 
-#: .\templates\index.html:127 .\templates\index.html:136
-#: .\templates\index.html:143
+#: .\templates\index.html:125 .\templates\index.html:134
+#: .\templates\index.html:141
 msgid "This is best site for tender"
 msgstr "هذا افضل موقع للحصول  المناقصات"
 
-#: .\templates\index.html:204
+#: .\templates\index.html:165
 msgid "WHO ARE WE ?"
 msgstr "من نحن ؟"
 
-#: .\templates\index.html:215
+#: .\templates\index.html:176
 msgid "safakat is platform"
 msgstr "صفقات منصة "
 
-#: .\templates\index.html:216
+#: .\templates\index.html:177
 msgid ""
 "is the best professional site that offers a shortcut to the ALGERIAN PUBLIC "
 "& PRIVATE markets. In addition to the NOTICES of CALLS FOR TENDERS, Our site "
@@ -76,277 +394,167 @@ msgstr ""
 "إلى إخطارات دعوات العطاءات ، ينشر موقعنا متابعة دورة حياة مشاريع الجوائز "
 "والإلغاء والبنية التحتية وإشعارات الطلبات والإنهاءات."
 
-#: .\templates\index.html:231
+#: .\templates\index.html:192
 msgid "Services"
 msgstr "الخدمات"
 
-#: .\templates\index.html:232
+#: .\templates\index.html:193
 msgid "we provied our customer with"
 msgstr "نحن نزود عملائنا ب"
 
-#: .\templates\index.html:242
+#: .\templates\index.html:203
 msgid " get all tenders across the entire national"
-msgstr "الحصةل على كل مناقصات التراب الوطني في مكان واحد"
+msgstr "الحصول على كل مناقصات التراب الوطني في مكان واحد"
 
-#: .\templates\index.html:252
+#: .\templates\index.html:213
 msgid "Daily and reliable data across the entire states of Algeria"
 msgstr "تحديث يومي و مصادر موثوقة"
 
-#: .\templates\index.html:261
+#: .\templates\index.html:222
 msgid "Competitive prices and convenient payment methods"
 msgstr "اسعار منافسة و طرق دفع مريحية"
 
-#: .\templates\index.html:275
+#: .\templates\index.html:236
 msgid "Last tender added"
 msgstr "اخر المناقصات التي اضيفت"
 
-#: .\templates\index.html:341
+#: .\templates\index.html:302
 msgid ""
 "We offer a range of subscription packages thcard-text at provide users with "
 "many features"
 msgstr "نحن نقدم مجموعة من حزم الاشتراك في تزويد المستخدمين بالعديد من الميزات"
 
-#: .\templates\index.html:348
+#: .\templates\index.html:309
 msgid "Studies and laboratories"
 msgstr "الدارسات و المخابر "
 
-#: .\templates\index.html:352
+#: .\templates\index.html:313
 msgid "up to 1 categories"
 msgstr "اختيار فئة واحدة"
 
-#: .\templates\index.html:353
+#: .\templates\index.html:314
 msgid "can select the categories"
 msgstr "يمكنك اختبار القطاع"
 
-#: .\templates\tender\archivetender.html:146
-msgid "sectors"
-msgstr "القطاعات"
+#: .\templates\tender\archivetender.html:165 .\templates\tender\tender.html:165
+#, fuzzy
+#| msgid "Jijel"
+msgid "\tJijel"
+msgstr " جيجل "
 
-#: .\templates\tender\archivetender.html:156
+#: .\templates\tender\archivetender.html:199 .\templates\tender\tender.html:199
+#, fuzzy
+#| msgid "Béni Abbès"
+msgid "\tBéni Abbès"
+msgstr " بني عباس"
+
+#: .\templates\tender\archivetender.html:230 .\templates\tender\tender.html:230
 msgid "search"
 msgstr "بحث "
 
-#: .\templates\tender\tender.html:86
-msgid "Adrar"
-msgstr "ولاية أدرار"
+#: .\templates\tender\archivetender.html:295
+msgid "Expired"
+msgstr "منتهية"
 
-#: .\templates\tender\tender.html:87
-msgid "Chlef"
-msgstr "ولاية الشلف"
+#: .\templates\tender\archivetender.html:298 .\templates\tender\tender.html:302
+msgid "state :"
+msgstr "الولاية"
 
-#: .\templates\tender\tender.html:88
-msgid "Laghouat"
-msgstr "ولاية الأغواط"
+#: .\templates\tender\archivetender.html:301 .\templates\tender\tender.html:305
+msgid "date :"
+msgstr "التاريخ"
 
-#: .\templates\tender\tender.html:89
-msgid "Oum El Bouaghi"
-msgstr "ولاية أم البواقي"
+#: .\templates\tender\archivetender.html:301
+msgid " to "
+msgstr "الى"
 
-#: .\templates\tender\tender.html:90
-msgid "Batna"
-msgstr "ولاية باتنة"
+#: .\templates\tender\tender.html:209
+#, fuzzy
+#| msgid "sectors"
+msgid "sector"
+msgstr "القطاعات"
 
-#: .\templates\tender\tender.html:91
-msgid "Béjaïa"
-msgstr "ولاية بجاية"
+#: .\templates\tender\tender.html:239
+msgid "tender archive"
+msgstr "ارشيف المنلقصات"
 
-#: .\templates\tender\tender.html:92
-msgid "Biskra"
-msgstr "ولاية بسكرة"
+#: .\templates\tender\tender.html:305
+msgid "to :"
+msgstr "الى"
 
-#: .\templates\tender\tender.html:93
-msgid "Béchar"
-msgstr "ولاية بشار"
+#: .\templates\tender\tender_detail.html:108
+msgid "Download Image >>"
+msgstr "تحميل الصورة <<"
 
-#: .\templates\tender\tender.html:94
-msgid "Blida"
-msgstr "ولاية البليدة"
+#: .\templates\tender\tender_detail.html:128
+msgid " end time : "
+msgstr "انتهاء التقديم"
 
-#: .\templates\tender\tender.html:95
-msgid "Bouïra"
-msgstr "ولاية البويرة"
+#: .\templates\tender\tender_detail.html:135
+#, fuzzy
+msgid "sectors"
+msgstr "القطاعات"
 
-#: .\templates\tender\tender.html:96
-msgid "Tamanrasset"
-msgstr "ولاية تمنراست"
 
-#: .\templates\tender\tender.html:97
-msgid "Tébessa"
-msgstr "ولاية تبسة"
 
-#: .\templates\tender\tender.html:98 .\templates\tender\tender.html:100
-#: .\templates\tender\tender.html:102
-msgid "Tlemcen"
-msgstr "ولاية تلمسان"
+#: .\templates\tender\tender_detail.html:135
+#, fuzzy
+msgid "sector : "
+msgstr "قطاع"
 
-#: .\templates\tender\tender.html:99
-msgid "Tiaret"
-msgstr "ولاية تيارت"
+#: .\templates\tender\tender_detail.html:139
+msgid "city : "
+msgstr "المدينة"
 
-#: .\templates\tender\tender.html:101
-msgid "Tizi Ouzou"
-msgstr "ولاية تيزي وزو"
+#~ msgid "Go Details"
+#~ msgstr "التفاصيل "
 
-#: .\templates\tender\tender.html:103
-msgid "Algiers"
-msgstr "ولاية الجزائر"
+#~ msgid "study and consultation"
+#~ msgstr " الدارسات و المخابر"
 
-#: .\templates\tender\tender.html:104
-msgid "Jijel"
-msgstr "\tولاية جيجل "
+#~ msgid "Limited national tenders"
+#~ msgstr "مناقصات وطنية محدودة"
 
-#: .\templates\tender\tender.html:105
-msgid "Sétif"
-msgstr "ولاية سطيف"
+#~ msgid "Open national tenders"
+#~ msgstr "المناقصات الوطنية المفتوحة"
 
-#: .\templates\tender\tender.html:106
-msgid "Saïda"
-msgstr "ولاية سعيدة"
+#~ msgid "limited international tenders"
+#~ msgstr "مناقصات دولية محدودة"
 
-#: .\templates\tender\tender.html:107
-msgid "Skikda"
-msgstr "\tولاية سكيكدة"
+#~ msgid "Limited international consulting"
+#~ msgstr "استشارات دولية محدودة"
 
-#: .\templates\tender\tender.html:108
-msgid "Sidi Bel Abbès"
-msgstr "ولاية سيدي بلعباس"
+#~ msgid "Notice of qualification"
+#~ msgstr "إشعار التأهيل"
 
-#: .\templates\tender\tender.html:109
-msgid "Annaba"
-msgstr "\tولاية عنابة"
+#~ msgid "Open national competition"
+#~ msgstr "إشعار وطني مسبق محدود"
 
-#: .\templates\tender\tender.html:110
-msgid "Guelma"
-msgstr "\tولاية قالمة"
+#~ msgid "Advance national notice"
+#~ msgstr "إشعار وطني مسبق"
 
-#: .\templates\tender\tender.html:111
-msgid "Constantine"
-msgstr "قسنطينة"
+#~ msgid "Limited advance national and international notice"
+#~ msgstr "إشعار مسبق محلي ودولي محدود"
 
-#: .\templates\tender\tender.html:112
-msgid "Médéa"
-msgstr "ولاية المدية"
+#~ msgid "Extending the deadlines for the limited national tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة الوطنية المحدودة"
 
-#: .\templates\tender\tender.html:113
-msgid "Mostaganem"
-msgstr "ولاية مستغانم"
+#~ msgid "Extending the deadlines for the national open tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة الوطنية المفتوحة"
 
-#: .\templates\tender\tender.html:114
-msgid "M'Sila"
-msgstr "\tولاية المسيلة"
+#~ msgid "Extending the deadlines for the limited international tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة الدولية المحدودة"
 
-#: .\templates\tender\tender.html:115
-msgid "Mascara"
-msgstr "ولاية معسكر"
+#~ msgid "Extension of deadlines for open international tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة الدولية المفتوحة"
 
-#: .\templates\tender\tender.html:116
-msgid "Ouargla"
-msgstr "\tولاية ورقلة"
+#~ msgid ""
+#~ "Extending the deadlines for the limited national and international tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة الوطنية والدولية المحدودة"
 
-#: .\templates\tender\tender.html:117
-msgid "Oran"
-msgstr "\tولاية وهران"
+#~ msgid ""
+#~ "Extending the deadlines for the national and international open tender"
+#~ msgstr "تمديد المواعيد النهائية للمناقصة المفتوحة الوطنية والدولية"
 
-#: .\templates\tender\tender.html:118
-msgid "El Bayadh"
-msgstr "ولاية البيض"
-
-#: .\templates\tender\tender.html:119
-msgid "Illizi"
-msgstr "ولاية إليزي"
-
-#: .\templates\tender\tender.html:120
-msgid "Bordj Bou Arréridj"
-msgstr "\tولاية برج بوعريريج"
-
-#: .\templates\tender\tender.html:121
-msgid "Boumerdès"
-msgstr "ولاية بومرداس"
-
-#: .\templates\tender\tender.html:122
-msgid "El Tarf"
-msgstr "ولاية الطارف"
-
-#: .\templates\tender\tender.html:123
-msgid "Tindouf"
-msgstr "\tولاية تندوف\t"
-
-#: .\templates\tender\tender.html:124
-msgid "Tissemsilt"
-msgstr "\tولاية تيسمسيلت"
-
-#: .\templates\tender\tender.html:125
-msgid "El Oued"
-msgstr "ولاية الوادي"
-
-#: .\templates\tender\tender.html:126
-msgid "Khenchela"
-msgstr "ولاية خنشلة"
-
-#: .\templates\tender\tender.html:127
-msgid "Souk Ahras"
-msgstr "\tولاية سوق أهراس"
-
-#: .\templates\tender\tender.html:128
-msgid "Tipaza"
-msgstr "\tولاية تيبازة"
-
-#: .\templates\tender\tender.html:129
-msgid "Mila"
-msgstr "ولاية ميلة"
-
-#: .\templates\tender\tender.html:130
-msgid "Aïn Defla"
-msgstr "\tولاية عين الدفلى"
-
-#: .\templates\tender\tender.html:131
-msgid "Naâma"
-msgstr "\tولاية النعامة"
-
-#: .\templates\tender\tender.html:132
-msgid "Aïn Témouchent"
-msgstr "ولاية عين تموشنت"
-
-#: .\templates\tender\tender.html:133
-msgid "El M'Ghair"
-msgstr "\tولاية غرداية"
-
-#: .\templates\tender\tender.html:134
-msgid "Relizane"
-msgstr "غليزان"
-
-#: .\templates\tender\tender.html:135
-msgid "El M \"Ghair"
-msgstr "ولاية المغير"
-
-#: .\templates\tender\tender.html:136
-msgid "Ouled Djellal"
-msgstr "ولاية أولاد جلال"
-
-#: .\templates\tender\tender.html:137
-msgid "Bordj Baji Mokhtar"
-msgstr "\tولاية برج باجي مختار"
-
-#: .\templates\tender\tender.html:138
-msgid "Béni Abbès"
-msgstr "\tولاية بني عباس"
-
-#: .\templates\tender\tender.html:139
-msgid "Touggourt"
-msgstr "\tولاية تقرت"
-
-#: .\templates\tender\tender.html:140
-msgid "Djanet"
-msgstr "\tولاية جانت"
-
-#: .\templates\tender\tender.html:141
-msgid "Ain Salah"
-msgstr "عين صلاح"
-
-#: .\templates\tender\tender.html:142
-msgid "Ain Guezzam"
-msgstr "أين جزم"
-
-#: .\templates\tender\tender.html:218
-msgid "Go Details"
-msgstr "التفاصيل "
+#~ msgid "Express interest"
+#~ msgstr "اهتمام صريح"

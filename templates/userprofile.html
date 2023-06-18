@@ -84,9 +84,9 @@
 	        {% endif %}
 
           <li>
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" id="language-select">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -96,7 +96,6 @@
                       </option>
                   {% endfor %}
               </select>
-              <input type="submit" value="Go">
           </form>
 
           </li>
@@ -204,7 +203,17 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 
-
+  <script>
+    // Get the language form and select elements
+    const languageForm = document.getElementById('language-form');
+    const languageSelect = document.getElementById('language-select');
+    
+    // Add an event listener to the select element
+    languageSelect.addEventListener('change', function() {
+        // Submit the form when the user changes the selection
+        languageForm.submit();
+    });
+  </script>
 
 
 
